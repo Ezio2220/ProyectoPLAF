@@ -10,6 +10,11 @@ var CREATE = "Agregar cliente";
 var UPDATE = "Actualizar cliente";
 var CAMBIO = CREATE;
 
+var fm;
+function leer(){
+    fm = document.getElementById("formprueba")
+}
+
 function inicializarPagina(){
   formularioDatos = document.getElementById('formDatos');
   formularioDatos.addEventListener("submit", enviarDatos, false);
