@@ -12,17 +12,73 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyC5Fz7x6mupIKZ8IsyyKS7WRN6Hr_rVcK8",
+    authDomain: "plaf-3cf84.firebaseapp.com",
+    databaseURL: "https://plaf-3cf84.firebaseio.com",
+    projectId: "plaf-3cf84",
+    storageBucket: "plaf-3cf84.appspot.com",
+    messagingSenderId: "709281942479"
+  };
+  firebase.initializeApp(config);
+</script>
+
 </head>
 
 <body class="dark-edition">
-  <div class="wrapper ">
+  <div class="wrapper">
     
     <div class="main-panel">
                    
       <div class="content">
         <div class="container-fluid">
+            
       <!-- your content here ##################################################################################-->
-          
+      <!--center-->
+        <div class="card card-nav-tabs text-center">
+            <div class="card-header card-header-primary">
+              LOGIN
+            </div>
+            <div class="card-body ">
+              <h4 class="card-title">INICIAR SESION</h4>
+            <form role="form" >
+                
+              <div class="row">
+                  <div class="col md-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fa fa-group"></i>
+                          </span>
+                        </div>
+                        <input type="text" id="user" class="form-control" placeholder="NOMBRE">
+                      </div>
+                  </div>
+                  <div class="col md-6">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">group</i>
+                          </span>
+                        </div>
+                        <input type="text" id="contra" class="form-control" placeholder="CONTRASEÑA">
+                      </div>
+                  </div>
+              </div><br>
+              <input type="submit" class="btn btn-primary">
+              
+            </form>
+            </div>
+            <div class="card-footer text-muted">
+              PLAF inc.
+            </div>
+          </div>
+      <!--/center-->
+      
 
         </div>
       </div>
