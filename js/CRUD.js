@@ -10,6 +10,15 @@ var CREATE = "Agregar cliente";
 var UPDATE = "Actualizar cliente";
 var CAMBIO = CREATE;
 
+var fm;
+var fs;
+function leer(){
+    fm = document.getElementById("formprueba");
+    fm.addEventListener("submit", algo,false);
+    fs = firebase.database().ref().child("Vendedores");
+    
+}
+
 function inicializarPagina(){
   formularioDatos = document.getElementById('formDatos');
   formularioDatos.addEventListener("submit", enviarDatos, false);
