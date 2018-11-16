@@ -13,19 +13,8 @@
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   
-<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyC5Fz7x6mupIKZ8IsyyKS7WRN6Hr_rVcK8",
-    authDomain: "plaf-3cf84.firebaseapp.com",
-    databaseURL: "https://plaf-3cf84.firebaseio.com",
-    projectId: "plaf-3cf84",
-    storageBucket: "plaf-3cf84.appspot.com",
-    messagingSenderId: "709281942479"
-  };
-  firebase.initializeApp(config);
-</script>
+
+
 
 </head>
 
@@ -45,7 +34,7 @@
             </div>
             <div class="card-body ">
               <h4 class="card-title">INICIAR SESION</h4>
-            <form action="https://ezio2220.github.io/ProyectoPLAF/cliente.html"   role="form" id="formprueba" >
+            <form   role="form" id="formprueba" >
                 
               <div class="row">
                   <div class="col md-6">
@@ -69,8 +58,9 @@
                       </div>
                   </div>
               </div><br>
-              <input value="ENVIAR" type="submit" class="btn btn-primary">
-              
+             <!-- <input value="ENVIAR" type="submit" class="btn btn-primary"-->
+             <input value="enviar" type="button" class="btn btn-primary" href='javascript:;' onclick="sd();" >
+             
             </form>
             </div>
             <div class="card-footer text-muted">
@@ -79,7 +69,9 @@
           </div>
       <!--/center-->
       
+          <div id="id2">
 
+          </div>
         </div>
       </div>
       <footer class="footer">
@@ -97,6 +89,9 @@
       </footer>
     </div>
   </div>
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script src="js/try.js" ></script>
+
   <!--   Core JS Files   -->
   <script src="./assets/js/core/jquery.min.js"></script>
   <script src="./assets/js/core/popper.min.js"></script>
