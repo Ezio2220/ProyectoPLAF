@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script src="js/acciones.js"></script>
 </head>
 
 <body class="dark-edition">
@@ -86,6 +88,7 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
+          
           <!-- your content here -->
           <div id="page-wrapper">
                 
@@ -105,7 +108,7 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                             <!-- Aquí pondremos el dataTable -->
-                                <table class="table table-hover table-bordered" id="usuarios">
+                                <table style="width: auto;" class="table table-hover table-bordered" id="usuarios">
                                     <thead class="">
                                         <tr class="">
                                           <th colspan="2" class="text-center"> Datos del Usuario</th>
@@ -123,7 +126,10 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tablau">
-                                         
+                                      <script type="text/javascript">
+                                      mostrar("Usuarios","tablau");
+                                      </script>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -143,16 +149,16 @@
                                         <br></br>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <form id="formDatospro" class="" action="" method="">
+                                <form id="formDatospro" action="JavaScript:nuevo('Usuarios',['Nombre','contraseña'],'Usuario');" >
                                     <div class="formImputs">
                                       <div class="form-group">
                                           <label for="">Usuario:</label>
-                                          <input type="text" class="form-control" id="usuau" name="usuau" placeholder="nickname">
+                                          <input type="text" class="form-control" id="Nombre" name="usuau" placeholder="nickname" required>
                                       </div>
                                       
                                       <div class="form-group">
                                           <label for="">Contraseña</label>
-                                          <input type="password" class="form-control" id="contrau" name="contrau" placeholder="*******">
+                                          <input type="password" class="form-control" id="contraseña" name="contrau" placeholder="*******" required>
                                       </div>
                                       
                                     </div>
@@ -199,6 +205,7 @@
     </div>
   </div>
   <!--   Core JS Files   -->
+  
   <script src="./assets/js/core/jquery.min.js"></script>
   <script src="./assets/js/core/popper.min.js"></script>
   <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
