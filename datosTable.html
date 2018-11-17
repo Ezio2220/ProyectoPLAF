@@ -29,18 +29,27 @@
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item   ">
-            <a class="nav-link" href="template.html">
-              <i class="material-icons">dashboard</i>
-              <p>Vendedores</p>
-            </a>
-          </li>
           <li class="nav-item  ">
-            <a class="nav-link" href="cliente.html">
+            <a class="nav-link" href="Principal.html">
               <i class="material-icons">person</i>
-              <p>Cliente</p>
+              <p>PRINCIPAL</p>
             </a>
           </li>
+          <ul class="nav">
+                <li class="nav-item  ">
+                  <a class="nav-link" href="Agregar.html">
+                    <i class="material-icons">person</i>
+                    <p>Agregar</p>
+                  </a>
+                </li>
+                <ul class="nav">
+                    <li class="nav-item  ">
+                      <a class="nav-link" href="cliente.html">
+                        <i class="material-icons">person</i>
+                        <p> Catalago</p>
+                      </a>
+                    </li>
+                    <ul class="nav">
           <li class="nav-item active  ">
             <a class="nav-link" href="#">
               <i class="material-icons">person</i>
@@ -109,6 +118,7 @@
                                           <div class="col">
                                       <label for="inputClient">Cliente</label>
                                       <select name="cliente"  class="form-control" placeholder="cliente" id="Client">
+                                        <!--opcion para cliente combobox-->
                                         <option value="carlos    " class="form-control">Carlos</option>
                                         <option value="Pedro     " class="form-control">Pedro</option>
                                       </select>
@@ -116,15 +126,50 @@
                                       <div class="col">
                                       <label for="inputVender">Vendedor</label>
                                       <select name="Vende"  class="form-control" placeholder="Vender" id="Vender">
+                                        <!--opcion para vendedores combobox-->
                                         <option value="carlos    " class="form-control">Carlos</option>
                                         <option value="Pedro     " class="form-control">Pedro</option>
                                       </select>
+                                      <br></br>
                                     </div> 
                                 </div>
                             </div>
-                            <div>
-                              <table class="form-control" class="row" ></table>
-                            </div>
+                            
+                       
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="panel panel-default">
+                                            
+                                            <!-- /.panel-heading -->
+                                            <div class="panel-body">
+                                            <!-- Aquí pondremos el dataTable -->
+                                                <table class="table table-hover table-bordered" id="clientes">
+                                                    <thead class="">
+                                                        <tr class="">
+                                                          <th colspan="5" class="text-center">PUNTO VENTA</th>
+                                                          
+                                                        </tr>
+                                                        <tr>
+                                                          <th>Cantidad</th>
+                                                          <th>Descripcion Producto o servicio</th>
+                                                          <th>subTotal</th>
+                                                          <th>total</th> 
+                                                        </tr>
+                                                      <tr>
+                                                        <th>
+                                                            <div class="form-group">
+                                                                <input type="number" class="form-control" id="canti" name="canti" placeholder="1">
+                                                            </div>
+                                                        </th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody id="tablac">
+                                                         
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.panel-body -->
+                                        </div>
                             <button type="submit" class="btn btn-primary">Registrar</button>
                           </form>
                     </div>
