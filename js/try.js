@@ -13,26 +13,46 @@
 
   var dbref = firebase.database();
   //.set() se agrega el objeto
-/*
+
+var y = document.getElementById("user").value;
+var x = document.getElementById("contra").value;
+//print(y);
 var obj = {
     Nombre: "franklin",
-    Telefono: 20203636,
-    Dui: 02;
+    Telefono: 2023636,
+    Dui: 02
 }
-var messageref0 = dbref.ref("Vendedores");
-messageref0.set("id2");
-messageref0.child("id2").set(obj);
+/*var messageref0 = dbref.ref("Vendedores").child(y);
+messageref0.child("Nombre").set(x);*/
+var message = dbref.ref("Vendedores");
+var lol="";
+message.on("value", function(snap) {
+  var datosArray = snap.val();
+  for(var documento in datosArray){
+    console.log("::"+documento);
+    //print(datosArray[documento].Nombre);
+    lol += datosArray[documento].Nombre+"-";
+    if(datosArray[documento].Nombre=== y){
+      alert("CORRECTO!");
+    }
+  }
+});
+console.log(lol);
+prueba.innerText = lol;
+/*
+var y = document.getElementById("user").value;
+print(y);
+var messageref = dbref.ref("Vendedores");
 */
-  var messageref = dbref.ref("Vendedores").child("id1");
-  messageref.once('value').then(function(snap){
+//messageref.child("Nombre").set(y);
+  /*messageref.once('value').then(function(snap){
         var x = snap.val();
         prueba.innerText = x.Nombre+" "+x.Dui+" "+x.Telefono;
         
      
-  });
-  var y = document.getElementById("user").value;
-  print(y);
-  messageref.child("Nombre").set(y);
+  });*/
+
+  //messageref.child("Nombre").set(y);
   //messageref.child("Nombre").set("vendedor1");
   /*messageref.on('value').then(function(snap){
       var dat = snap.val();
