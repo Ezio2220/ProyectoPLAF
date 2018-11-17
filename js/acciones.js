@@ -11,14 +11,16 @@
   var db = firebase.database();
 
   //root toma el nombre de la tabla donde se escribira y titulo toma un array de los campos que esta tenga
-  function nuevo(root,titulo){
+  function nuevo(root,titulo,loc){
     var data = firebase.database().ref(root);
-    var n;var n1;
     var obj = new Object();
+    if(root!="Usuarios"){
+    var n;var n1;
+    
     titulo.forEach(function(i){
         obj[i]=document.getElementById(i).value;
     });
-   
+    
     data.once("value", function(snap) {
         var aux = snap.val();
         for(var documento in aux){
@@ -37,7 +39,51 @@
         add.set(obj);
         
     });       
-   
+    }else{
+        obj["contraseña"]=document.getElementById("contraseña").value;
+        obj["Tipo"]="admin";
+        data.child(document.getElementById("Nombre").value).set(obj);
+    }
+    alert("GUARDADO!");
+    window.location=loc+".html";
+  }
+  function mostrar(root,table){
+      var data = firebase.database().ref(root);
+      var tbl = document.getElementById(table);
+      var obj = new Object();
+      var tot="";
+      if(root=="Usuarios"){
+          console.log("user");
+            data.once("value", function(snap) {
+                var aux = snap.val();
+                for(var documento in aux){
+                    console.log("a");
+                    var x;
+                    x= "<tr> <td>"+documento+" </td>"+
+                          "<td>"+aux[documento].contraseña+" </td>"+
+                          "<td> "+
+                    "<button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button id='edit' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
+                    +"</td> </tr>"; 
+                    var acum = x.substring(0,x.length-4);
+                    tot+=acum;
+                    console.log(tot);
+                    
+                }
+                tbl.innerHTML = tot;
+          }); 
+      }else{
+        console.log("not user");
+        data.once("value", function(snap) {
+            var aux = snap.val();
+            for(var documento in aux){
+
+            }
+
+        }); 
+      }
+      
+
   }
   function login(){
     var data = firebase.database().ref("Usuarios");
