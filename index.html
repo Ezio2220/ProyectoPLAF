@@ -34,7 +34,7 @@
             </div>
             <div class="card-body ">
               <h4 class="card-title">INICIAR SESION</h4>
-            <form   role="form" id="formprueba" >
+            <form action="JavaScript:login();"  role="form" id="formprueba" >
                 
               <div class="row">
                   <div class="col md-6">
@@ -44,7 +44,7 @@
                             <i class="fa fa-group"></i>
                           </span>
                         </div>
-                        <input type="text" id="user" class="form-control" placeholder="NOMBRE">
+                        <input type="text" id="user" class="form-control" placeholder="NOMBRE" required>
                       </div>
                   </div>
                   <div class="col md-6">
@@ -54,13 +54,13 @@
                             <i class="material-icons">group</i>
                           </span>
                         </div>
-                        <input type="text" id="contra" class="form-control" placeholder="CONTRASEÑA">
+                        <input type="text" id="contra" class="form-control" placeholder="CONTRASEÑA" required>
                       </div>
                   </div>
               </div><br>
-             <!-- <input value="ENVIAR" type="submit" class="btn btn-primary"-->
-             <input value="enviar" type="button" class="btn btn-primary" href='javascript:;' onclick="sd();" >
-             
+             <!-- <input value="ENVIAR" type="submit" class="btn btn-primary">
+             <input value="enviar" type="button" class="btn btn-primary" href='javascript:;' onclick="sd();" -->
+             <input name="sd" value="ENVIAR" type="submit" class="btn btn-primary">
             </form>
             </div>
             <div class="card-footer text-muted">
@@ -90,7 +90,7 @@
     </div>
   </div>
 <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-<script src="js/try.js" ></script>
+<script src="js/acciones.js" ></script>
 
   <!--   Core JS Files   -->
   <script src="./assets/js/core/jquery.min.js"></script>
