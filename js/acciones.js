@@ -11,7 +11,7 @@
   var db = firebase.database();
 
   //root toma el nombre de la tabla donde se escribira y titulo toma un array de los campos que esta tenga
-  function nuevo(root,titulo,loc){
+  function nuevo(root,titulo,loc){//****************************************************FUNCION PARA GUARDAR
     var data = firebase.database().ref(root);
     var obj = new Object();
     if(root!="Usuarios"){
@@ -47,17 +47,24 @@
     alert("GUARDADO!");
     window.location=loc+".html";
   }
+  ////****************************************************FUNCION PARA ELIMINAR
   function borrar(root,id){
+      var data = firebase.database().ref(root);
+      var item = document.getElementById(id).value;
+      data.child(item).delete();
     alert("borrado");
     }
+//****************************************************FUNCION PARA EDITAR
     function edit(root,id){
-        alert("modificado");
+        alert("modificado"); 
     }
+//**************************************************** FUNCION PARA MOSTRAR EN TABLA!!!!
   function mostrar(root,table,n=[0,0]){
       var data = firebase.database().ref(root);
       var tbl = document.getElementById(table);
       var obj = new Object();
       var tot="";
+      var i=1;
       if(root=="Usuarios"){
           console.log("user");
             data.once("value", function(snap) {
@@ -69,13 +76,13 @@
                     x= "<tr> <td>"+documento+" </td>"+
                           "<td>"+aux[documento].contraseña+" </td>"+
                           "<td> "+
-                    "<button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
-                    "<button id='edit' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
+                    "<button action='"+"javascript:borrar('"+root+"','"+delete+i+"');"+"' id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
                     +"</td> </tr>"; 
                     var acum = x.substring(0,x.length-4);
                     tot+=acum;
                     //console.log(tot);
-                    
+                    i=i+1;
                 }
                 tbl.innerHTML = tot;
           }); 
@@ -92,12 +99,13 @@
                     console.log(xy[i]);
                 });
                 
-                x+="<td><button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
-                    "<button id='edit' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
+                x+="<td><button action='"+"javascript:borrar('"+root+"','"+delete+i+"');"+"' id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
                     "</td> </tr>";
                 var acum = x.substring(0,x.length-5);
                 tot+=acum;
                 console.log(tot);
+                i=i+1;
             }
             tbl.innerHTML = tot;
         }); 
