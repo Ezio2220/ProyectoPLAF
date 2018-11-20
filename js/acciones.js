@@ -83,13 +83,15 @@
                 x= "<tr>";
                 n.forEach(function(i){
                     x+="<td>"+xy[i]+"</td>"
+                    console.log(xy[i]);
                 });
-
-                x+="<button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                
+                x+="<td><button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
                     "<button id='edit' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
-                    " </tr>";
-                var acum = x.substring(0,x.length-4);
+                    "</td> </tr>";
+                var acum = x.substring(0,x.length-5);
                 tot+=acum;
+                console.log(tot);
             }
             tbl.innerHTML = tot;
         }); 
