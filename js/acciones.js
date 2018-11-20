@@ -47,6 +47,12 @@
     alert("GUARDADO!");
     window.location=loc+".html";
   }
+  function borrar(root,id){
+    alert("borrado");
+    }
+    function edit(root,id){
+        alert("modificado");
+    }
   function mostrar(root,table,n=[0,0]){
       var data = firebase.database().ref(root);
       var tbl = document.getElementById(table);
@@ -99,6 +105,8 @@
       
 
   }
+
+  
   function login(){
     var data = firebase.database().ref("Usuarios");
     var bandera = true;
