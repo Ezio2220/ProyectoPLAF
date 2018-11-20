@@ -79,7 +79,7 @@
                     x= "<tr> <td>"+documento+" </td>"+
                           "<td>"+aux[documento].contraseña+" </td>"+
                           "<td> "+
-                    "<button onclick='"+"javascript:borrar('"+root+"','"+delete+""+i+"');"+"' id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
                     "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
                     +"</td> </tr>"; 
                     var acum = x.substring(0,x.length-4);
