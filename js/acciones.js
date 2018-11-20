@@ -47,7 +47,7 @@
     alert("GUARDADO!");
     window.location=loc+".html";
   }
-  function mostrar(root,table){
+  function mostrar(root,table,n=[0,0]){
       var data = firebase.database().ref(root);
       var tbl = document.getElementById(table);
       var obj = new Object();
@@ -57,7 +57,8 @@
             data.once("value", function(snap) {
                 var aux = snap.val();
                 for(var documento in aux){
-                    console.log("a");
+                    var xy = aux[documento]
+                   // console.log("a");
                     var x;
                     x= "<tr> <td>"+documento+" </td>"+
                           "<td>"+aux[documento].contraseña+" </td>"+
@@ -67,7 +68,7 @@
                     +"</td> </tr>"; 
                     var acum = x.substring(0,x.length-4);
                     tot+=acum;
-                    console.log(tot);
+                    //console.log(tot);
                     
                 }
                 tbl.innerHTML = tot;
@@ -77,9 +78,20 @@
         data.once("value", function(snap) {
             var aux = snap.val();
             for(var documento in aux){
+                var xy = aux[documento]
+                var x;
+                x= "<tr>";
+                n.forEach(function(i){
+                    x+="<td>"+xy[i]+"</td>"
+                });
 
+                x+="<button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button id='edit' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
+                    " </tr>";
+                var acum = x.substring(0,x.length-4);
+                tot+=acum;
             }
-
+            tbl.innerHTML = tot;
         }); 
       }
       
