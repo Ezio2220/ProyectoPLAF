@@ -49,9 +49,12 @@
   }
   ////****************************************************FUNCION PARA ELIMINAR
   function borrar(root,id){
+     // console.log(root);
+     // console.log(id);
       var data = firebase.database().ref(root);
       var item = document.getElementById(id).value;
-      data.child(item).delete();
+     // console.log(item);
+      data.child(item).remove();
     alert("borrado");
     }
 //****************************************************FUNCION PARA EDITAR
@@ -76,7 +79,7 @@
                     x= "<tr> <td>"+documento+" </td>"+
                           "<td>"+aux[documento].contraseña+" </td>"+
                           "<td> "+
-                    "<button action='"+"javascript:borrar('"+root+"','"+delete+i+"');"+"' id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button onclick='"+"javascript:borrar('"+root+"','"+delete+""+i+"');"+"' id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
                     "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
                     +"</td> </tr>"; 
                     var acum = x.substring(0,x.length-4);
@@ -99,7 +102,7 @@
                     console.log(xy[i]);
                 });
                 
-                x+="<td><button action='"+"javascript:borrar('"+root+"','"+delete+i+"');"+"' id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                x+="<td><button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
                     "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
                     "</td> </tr>";
                 var acum = x.substring(0,x.length-5);
