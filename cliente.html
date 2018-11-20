@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script src="js/acciones.js"></script>
 </head>
 
 <body class="dark-edition">
@@ -133,7 +135,9 @@
                                       </tr>
                                   </thead>
                                   <tbody id="tablac">
-                                       
+                                      <script type="text/javascript">
+                                        mostrar("Clientes","tablac",["Nombre","Direccion","Telefono","Dui","Nit"]);
+                                      </script>
                                   </tbody>
                               </table>
                           </div>
@@ -153,28 +157,28 @@
                                       <br></br>
                           <!-- /.panel-heading -->
                           <div class="panel-body">
-                              <form id="formDatospro" class="" action="" method="">
+                              <form id="formDatospro" class="" action="JavaScript:nuevo('Clientes',['Nombre','Direccion','Telefono','Dui','Nit'],'cliente');" method="">
                                   <div class="formImputs">
                                     <div class="form-group">
                                         <label for="">Nombre:</label>
-                                        <input type="text" class="form-control" id="nomc" name="nomc" placeholder="Luis cordova">
+                                        <input type="text" class="form-control" id="Nombre" name="nomc" placeholder="Luis cordova" required>
                                     </div>
                                     
                                     <div class="form-group">
                                         <label for="">Direccion</label>
-                                        <input type="text" class="form-control" id="dirc" name="dirc" placeholder="10 Urbes, san miuel">
+                                        <input type="text" class="form-control" id="Direccion" name="dirc" placeholder="10 Urbes, san miuel" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Telefono</label>
-                                        <input type="number" class="form-control" id="tec" name="tec" placeholder="1234-1233">
+                                        <input type="number" class="form-control" id="Telefono" name="tec" placeholder="1234-1233" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Dui:</label>
-                                        <input type="text" class="form-control" id="duic" name="duic" placeholder="12345-0">
+                                        <input type="text" class="form-control" id="Dui" name="duic" placeholder="12345-0" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="">Nit:</label>
-                                        <input type="text" class="form-control" id="nitc" name="nitc" placeholder="12233-0">
+                                        <input type="text" class="form-control" id="Nit" name="nitc" placeholder="12233-0" required>
                                     </div>
                                     
                                   </div>
