@@ -125,6 +125,7 @@
     var db = firebase.database().ref("Estado");
     db.once("value", function(snap) {
         var aux = snap.val();
+         console.log(aux["Actual"]);
         if(aux["Actual"]==0){
             window.location="index.html";
         }
@@ -132,9 +133,11 @@
   }
   
   function close(){
+      console.log("cerrar sesion");
       var db = firebase.database().ref("Estado");
       db.child("Actual").set(0);
-      db.child("user").set(0);
+      db.child("user").set("0");
+      alert("Cerrando sesion..");
       window.location="index.html";
   }
 
