@@ -1,6 +1,6 @@
  
  //var activo = 0;
-
+var Actual;
  // Initialize Firebase
  
  var config = {
@@ -122,27 +122,36 @@
 
   }
   function SESSION(){
-    var db = firebase.database().ref("Estado");
+    //var db = firebase.database().ref("Estado");
+        var db = firebase.database().ref("Usuarios");
+        var act = localStorage.getItem("Actual");
+        console.log(act);
     db.once("value", function(snap) {
         var aux = snap.val();
-         console.log(aux["Actual"]);
-        if(aux["Actual"]==0){
+         //console.log(aux["Actual"]);
+         if(aux[act].Estado == 0){
             window.location="index.html";
-        }
+         }
+     /*   if(aux["Actual"]==0){
+            window.location="index.html";
+        }*/
     });
   }
   
   function close(){
       console.log("cerrar sesion");
-      var db = firebase.database().ref("Estado");
+      var act = localStorage.getItem("Actual");
+      var db = firebase.database().ref("Usuarios").child(act);
+      db.child("Estado").set(0);
+      /*firebase.database().ref("Estado");
       db.child("Actual").set(0);
-      db.child("user").set("0");
+      db.child("user").set("0");*/
       alert("Cerrando sesion..");
       window.location="index.html";
   }
 
   function login(){
-    var db = firebase.database().ref("Estado");
+    //var db = firebase.database().ref("Estado");
     var data = firebase.database().ref("Usuarios");
     var bandera = true;
     var name = document.getElementById("user").value;
@@ -156,8 +165,11 @@
                 bandera=false;
                 if(pass == aux[documento].contraseña){
                     alert("Correcto");
-                    db.child("Actual").set(1);
-                    db.child("user").set(name);
+                    data.child(name).child("Estado").set(1);
+                    this.Actual = name;
+                    localStorage.setItem("Actual",name);
+                    //db.child("Actual").set(1);
+                    //db.child("user").set(name);
                     window.location="Principal.html";
                 }else{
                     
