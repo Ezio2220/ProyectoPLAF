@@ -56,7 +56,7 @@
      // console.log(item);
       data.child(item).remove();
     alert("borrado");
-    location.reload();
+    location.reload(true);
     }
 //****************************************************FUNCION PARA EDITAR
     function edit(root,id){
