@@ -1,4 +1,8 @@
+ 
+ //var activo = 0;
+
  // Initialize Firebase
+ 
  var config = {
     apiKey: "AIzaSyC5Fz7x6mupIKZ8IsyyKS7WRN6Hr_rVcK8",
     authDomain: "plaf-3cf84.firebaseapp.com",
@@ -117,9 +121,25 @@
       
 
   }
-
+  function SESSION(){
+    var db = firebase.database().ref("Estado");
+    db.once("value", function(snap) {
+        var aux = snap.val();
+        if(aux["Actual"]==0){
+            window.location="index.html";
+        }
+    });
+  }
   
+  function close(){
+      var db = firebase.database().ref("Estado");
+      db.child("Actual").set(0);
+      db.child("user").set(0);
+      window.location="index.html";
+  }
+
   function login(){
+    var db = firebase.database().ref("Estado");
     var data = firebase.database().ref("Usuarios");
     var bandera = true;
     var name = document.getElementById("user").value;
@@ -133,6 +153,8 @@
                 bandera=false;
                 if(pass == aux[documento].contraseña){
                     alert("Correcto");
+                    db.child("Actual").set(1);
+                    db.child("user").set(name);
                     window.location="Principal.html";
                 }else{
                     
