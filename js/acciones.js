@@ -485,7 +485,7 @@ function Catalogo(){
     });
 
   }
-  function combox(root,fields=[0,0],target){
+  function combox(root,fields=[0,0],target,ty=0){
     var db = firebase.database().ref(root);
     var targ = document.getElementById(target);
     var add="";
@@ -493,11 +493,19 @@ function Catalogo(){
         var aux = snap.val();
         for(var documento in aux){
             var xy = aux[documento];
+            if(ty=="0"){
             add+="<option value='"+documento+"' class='form-control'>";
             fields.forEach(function(i){
                 add+=xy[i]+" ";
             });
             add+="</option>";
+            }else{
+                add+="<option class='form-control' value='";
+                fields.forEach(function(i){
+                    add+=xy[i]+" ";
+                });
+                add+="'>";
+            }
             targ.innerHTML += add;
             add="";
         }
