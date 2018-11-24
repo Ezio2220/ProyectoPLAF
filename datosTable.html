@@ -158,8 +158,16 @@
                       <form>
                             <div class="row">
                                     <div class="col">
-                                        <label for="inputBuscador">Buscar</label>
-                                      <input type="search" class="form-control" placeholder="Buscar" id="Buscador">
+                                        <label for="Buscador">Buscar</label>
+                                        <input class="form-control" list="Buscador" name="Buscador">
+                                        <datalist class="form-control" style="background-color: #202940;" id="Buscador">
+
+                                        </datalist>
+                                        <script type="text/javascript">
+                                          combox("Producto",["Nombre","Marca"],"Buscador",1);
+                                          combox("Servicio",["Nombre","Duracion"],"Buscador",1);
+                                        </script>
+                                        <!--input type="search" class="form-control" placeholder="Buscar" id="Buscador"-->
                                     </div>
                                     
                                   </div>
