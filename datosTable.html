@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script src="js/acciones.js"></script>
   
 </head>
 
@@ -118,19 +120,24 @@
                                       <div class="row">
                                           <div class="col">
                                       <label for="inputClient">Cliente</label>
-                                      <select name="cliente"  class="form-control" placeholder="cliente" id="Client">
-                                        <!--opcion para cliente combobox-->
-                                        <option value="carlos    " class="form-control">Carlos</option>
-                                        <option value="Pedro     " class="form-control">Pedro</option>
+                                      <select style="background-color: #202940;" name="cliente"  class="form-control" placeholder="cliente" id="Client">                                        
                                       </select>
+                                      <script type="text/javascript">
+                                        combox("Clientes",["Nombre","Telefono"],"Client");
+                                      </script>
                                     </div>
                                       <div class="col">
                                       <label for="inputVender">Vendedor</label>
-                                      <select name="Vende"  class="form-control" placeholder="Vende" id="Vende">
-                                        <!--opcion para vendedores combobox-->
+                                      
+                                      <input type="text" disabled class="form-control" id="vend">
+                                      <script type="text/javascript">
+                                          getvend("vend");
+                                      </script>
+                                      <!--select name="Vende"  class="form-control" placeholder="Vende" id="Vende">
+                                        <!--opcion para vendedores combobox>
                                         <option value="carlos    " class="form-control">Carlos</option>
                                         <option value="Pedro     " class="form-control">Pedro</option>
-                                      </select>
+                                      </select-->
                                       <br></br>
                                     </div> 
                                 </div>
@@ -153,19 +160,22 @@
                                                           <th>Cantidad</th>
                                                           <th>Descripcion Producto o servicio</th>
                                                           <th>subTotal</th>
-                                                          <th>total</th> 
                                                         </tr>
-                                                      <tr>
+                                                      <!--tr>
                                                         <th>
                                                             <div class="form-group">
-                                                              <!--para que cree el campo donde ingresara la cantidad de producto y servicios-->
+                                                              <para que cree el campo donde ingresara la cantidad de producto y servicios>
                                                                 <input type="number" class="form-control" id="canti" name="canti" placeholder="1">
                                                             </div>
                                                         </th>
-                                                      </tr>
+                                                      </tr-->
                                                     </thead>
                                                     <tbody id="tablac">
-                                                         
+                                                        <script type="text/javascript">
+                                                        var x = localStorage.getItem("n1");
+                                                        var y = localStorage.getItem("n2");
+                                                        traspaso(parseInt(x),parseInt(y));  
+                                                        </script>
                                                     </tbody>
                                                 </table>
                                             </div>
