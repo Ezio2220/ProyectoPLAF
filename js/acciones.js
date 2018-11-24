@@ -15,7 +15,7 @@ var Actual;
   var db = firebase.database();
 
   //root toma el nombre de la tabla donde se escribira y titulo toma un array de los campos que esta tenga
-  function nuevo(root,titulo,loc,sel=0,title=[0,0]){//****************************************************FUNCION PARA GUARDAR
+  function nuevo(root,titulo,loc,sel=0){//****************************************************FUNCION PARA GUARDAR
     var data = firebase.database().ref(root);
     var obj = new Object();
     
@@ -24,16 +24,12 @@ var Actual;
     
     titulo.forEach(function(i){
          console.log(i);
-        if(sel!=0){
-            
-            var j = document.getElementById(i).value;
-            console.log(j);
-            obj[i] = j.substring(0,j.length);
-            console.log(j +"-"+obj[i]);
-        }else{
-             obj[i]=document.getElementById(i).value;
-        }
-       
+         if(sel!=0){
+            obj[i.substring(0,i.length-1)]=document.getElementById(i).value;
+         }else{
+            obj[i]=document.getElementById(i).value;
+         }
+        
     });
     
     data.once("value", function(snap) {
@@ -91,16 +87,35 @@ var Actual;
         var x = document.getElementById("foredit");
         x.innerHTML = "";
     }
-    function geti(y){
+    /*function geti(y){
         var k = Array();
+
         y.forEach(function(i){
-            console.log(document.getElementById(i).value);
+            console.log(i);
+            console.log(document.getElementById("Nit1").value);
             k.push(document.getElementById(i).value);
         });
         return k;
-    }
+    }*/
 //****************************************************FUNCION PARA EDITAR
-    function editar(root,id,n1=[0,0]){
+function edt(root,titulo,loc,sel=0,title=[0,0]){//****************************************************FUNCION PARA GUARDAR
+    var data = firebase.database().ref(root);
+    var obj = new Object();
+    console.log(titulo);
+
+    titulo.forEach(function(i){
+         console.log(i);
+            obj[i] = document.getElementById(i).value;
+        //console.log("-"+obj[i]); 
+    });
+    var add;
+    add = data.child(sel);
+    add.set(obj);
+       alert("Actualizado");
+    location.reload(true);
+    //window.location=loc+".html";
+  }
+function editar(root,id,n1=[0,0]){
         var item = document.getElementById(id).value;
         console.log(item);
         console.log(n1);
@@ -125,16 +140,18 @@ var Actual;
               "<button onclick='emptymodal();' style='color: white;' type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
                 "<span aria-hidden='true'>&times;</span>"+
               "</button>"+
-            "</div> <form id = 'formedt' action=\"JavaScript:nuevo('"+root+"',["+y+"],'"+root+"','"+item+"',["+geti(y)+"]);\">"+
-            "<div class='modal-body'>";
+            "</div> <form id = 'formedt' action=\"JavaScript:nuevo('"+root+"',["+y+"],'"+root+"','"+item+"');\">"+
+            "<div class='modal-body'><div class='formImputs'>";
 
             n1.forEach(function(i){
-
+               modal += "<div class='form-group'><label>"+i.id.substring(0,i.id.length-1)+"</label>";
                modal += i.outerHTML;
                 console.log(i.outerHTML);
+                modal +="</div>";
+                i.id = i.id.substring(0,i.id.length-1);
             });
             modal+=
-            "</div>"+
+            "</div></div>"+
             "<div style='border-top: 1px solid #8b92a975;' class='modal-footer'>"+
               "<button onclick='emptymodal();'  type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
               "<button type='submit' class='btn btn-primary'>Actualizar</button>"+
