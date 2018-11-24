@@ -22,11 +22,8 @@
 <body class="dark-edition">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="black" data-image="./assets/img/sidebar-2.jpg">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-      Tip 2: you can also add an image using data-image tag
-  -->
+      <!--Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+      Tip 2: you can also add an image using data-image tag-->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Creative Tim
@@ -38,6 +35,20 @@
             <a class="nav-link" href="Principal.html">
               <i class="material-icons">person</i>
               <p>PRINCIPAL</p>
+            </a>
+          </li>
+        <ul class="nav">
+          <li class="nav-item ">
+            <a class="nav-link" href="Agregar.html">
+              <i class="material-icons">settings</i>
+              <p>Agregar</p>
+            </a>
+          </li>
+        <ul class="nav">
+          <li class="nav-item ">
+            <a class="nav-link" href="Catalogo.html">
+              <i class="material-icons">collections_bookmark</i>
+              <p> Catalago</p>
             </a>
           </li>
           <ul class="nav">
@@ -65,9 +76,7 @@
           <!-- your sidebar here -->
         </ul>
       </div>
-
     </div>
-    
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
@@ -149,109 +158,98 @@
       <div class="content">
         <div class="container-fluid">
           <!-- your content here -->
-          <div id="page-wrapper">
-                
-              <!-- /.row -->
-              <div class="card card-nav-tabs">
-                      <div class="card-header card-header-warning">
-                              <div class="panel-heading panel-heading-primary">
-                                      <i class="fa fa-database fa-fw"></i>Clientes registrados
-                                  </div>
-                      </div>
-                      <div class="card-body">
-                       
-              <div class="row">
+          <div id="page-wrapper">     
+            <!-- /.row -->
+            <div class="card card-nav-tabs">
+              <div class="card-header card-header-warning">
+                <div class="panel-heading panel-heading-primary">
+                  <i class="fa fa-database fa-fw"></i>Clientes registrados
+                </div>
+              </div>
+              <div class="card-body"> 
+                <div class="row">
                   <div class="col-lg-8">
-                      <div class="panel panel-default">
-                          
-                          <!-- /.panel-heading -->
-                          <div class="panel-body">
-                          <!-- Aquí pondremos el dataTable -->
-                              <table class="table table-hover table-bordered" id="clientes">
-                                  <thead class="">
-                                      <tr class="">
-                                        <th colspan="5" class="text-center"> Datos del Cliente</th>
-                                        <th colspan="1" class="text-center">Acciones</th>
-                                      </tr>
-                                      <tr>
-                                        <th>Nombre</th>
-                                        <th>Direccion</th>
-                                        <th>Telefono</th>
-                                        <th>DUI</th>
-                                        <th>Nit</th>
-                                        
-
-
-                                       
-                                       
-                                        <th></th>
-                                      </tr>
-                                  </thead>
-                                  <tbody id="tablac">
-                                      <script type="text/javascript">
-                                        mostrar("Clientes","tablac",["Nombre","Direccion","Telefono","Dui","Nit"]);
-                                      </script>
-                                  </tbody>
-                              </table>
-                          </div>
-                          <!-- /.panel-body -->
+                    <div class="panel panel-default">      
+                      <!-- /.panel-heading -->
+                      <div class="panel-body">
+                        <!-- Aquí pondremos el dataTable -->
+                        <table class="table table-hover table-bordered" id="clientes">
+                          <thead class="">
+                            <tr class="">
+                              <th colspan="5" class="text-center"> Datos del Cliente</th>
+                              <th colspan="1" class="text-center">Acciones</th>
+                            </tr>
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Direccion</th>
+                              <th>Telefono</th>
+                              <th>DUI</th>
+                              <th>Nit</th>           
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody id="tablac">
+                            <script type="text/javascript">
+                              mostrar("Clientes","tablac",["Nombre","Direccion","Telefono","Dui","Nit"]);
+                            </script>
+                          </tbody>
+                        </table>
                       </div>
+                      <!-- /.panel-body -->
+                    </div>
                   </div>
                   <!-- /.col-lg-8 -->
                   <div class="col-lg-4">
-                      <div class="panel panel-default">
-                              <div class="card card-nav-tabs">
-                                      <div class="card-header card-header-warning">
-                                              <div class="panel-heading panel-heading-primary">
-                                                      <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar Cliente
-                                                  </div>
-                                                  
-                                      </div>
-                                      <br></br>
-                          <!-- /.panel-heading -->
-                          <div class="panel-body">
-                              <form id="formDatospro" class="" action="JavaScript:nuevo('Clientes',['Nombre','Direccion','Telefono','Dui','Nit'],'cliente');" method="">
-                                  <div class="formImputs">
-                                    <div class="form-group">
-                                        <label for="">Nombre:</label>
-                                        <input type="text" class="form-control" id="Nombre" name="nomc" placeholder="Luis cordova" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="">Direccion</label>
-                                        <input type="text" class="form-control" id="Direccion" name="dirc" placeholder="10 Urbes, san miuel" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Telefono</label>
-                                        <input type="number" class="form-control" id="Telefono" name="tec" placeholder="1234-1233" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Dui:</label>
-                                        <input type="text" class="form-control" id="Dui" name="duic" placeholder="12345-0" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">Nit:</label>
-                                        <input type="text" class="form-control" id="Nit" name="nitc" placeholder="12233-0" required>
-                                    </div>
-                                    
-                                  </div>
-                                  <div class="formButtons">
-                                    <center>
-                                      <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddc" value="Agregar Cliente"></input>
-                                      <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
-                                    </center>
-                                  </div>
-                              </form>
-                          </div>
-                          <!-- /.panel-body -->
+                    <div class="panel panel-default">
+                      <div class="card card-nav-tabs">
+                        <div class="card-header card-header-warning">
+                          <div class="panel-heading panel-heading-primary">
+                            <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar Cliente
+                          </div>                                
+                        </div>
+                        <br></br>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                          <form id="formDatospro" class="" action="JavaScript:nuevo('Clientes',['Nombre','Direccion','Telefono','Dui','Nit'],'cliente');" method="">
+                            <div class="formImputs">
+                              <div class="form-group">
+                                <label for="">Nombre:</label>
+                                <input type="text" class="form-control" id="Nombre" name="nomc" placeholder="Luis cordova" required>
+                              </div>           
+                              <div class="form-group">
+                                <label for="">Direccion</label>
+                                <input type="text" class="form-control" id="Direccion" name="dirc" placeholder="10 Urbes, san miuel" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="">Telefono</label>
+                                <input type="number" class="form-control" id="Telefono" name="tec" placeholder="1234-1233" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="">Dui:</label>
+                                <input type="text" class="form-control" id="Dui" name="duic" placeholder="12345-0" required>
+                              </div>
+                              <div class="form-group">
+                                <label for="">Nit:</label>
+                                <input type="text" class="form-control" id="Nit" name="nitc" placeholder="12233-0" required>
+                              </div>      
+                            </div>
+                            <div class="formButtons">
+                              <center>
+                                <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddc" value="Agregar Cliente"></input>
+                                <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
+                              </center>
+                            </div>
+                          </form>
+                        </div>
+                      <!-- /.panel-body -->
                       </div>
-                  </div>
+                    </div>
                   <!-- /.col-lg-4 -->
+                  </div>
+                </div>
               </div>
+            </div>
           </div>
-      </div>
-  </div>
-</div>
         </div>
       </div>
       <footer class="footer">
@@ -276,6 +274,9 @@
         </div>
       </footer>
     </div>
+  </div>
+  <div id="foredit">
+    
   </div>
   <!--   Core JS Files   -->
   <script src="./assets/js/core/jquery.min.js"></script>
