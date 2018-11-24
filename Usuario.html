@@ -22,48 +22,45 @@
       <!--
       Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-      Tip 2: you can also add an image using data-image tag
-  -->
+      Tip 2: you can also add an image using data-image tag -->
       <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
           Creative Tim
         </a>
-    </div>
-    <div class="sidebar-wrapper">
-      <ul class="nav">
-        <li class="nav-item ">
-          <a class="nav-link" href="Principal.html">
-            <i class="material-icons">person</i>
-            <p>PRINCIPAL</p>
-          </a>
-        </li>
+      </div>
+      <div class="sidebar-wrapper">
         <ul class="nav">
-              <li class="nav-item  ">
-                <a class="nav-link" href="Agregar.html">
-                  <i class="material-icons">settings</i>
-                  <p>Agregar</p>
-                </a>
-              </li>
-              <ul class="nav">
-                    <li class="nav-item  ">
-                      <a class="nav-link" href="Catalogo.html">
-                        <i class="material-icons">collections_bookmark</i>
-                        <p> Catalago</p>
-                      </a>
-                    </li>
-                    <ul class="nav">
-                      <li class="nav-item  ">
-                        <a class="nav-link" href="datosTable.html">
-                          <i class="material-icons">person</i>
-                          <p>Cotizacion</p>
-                        </a>
-                      </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="Principal.html">
+              <i class="material-icons">person</i>
+              <p>PRINCIPAL</p>
+            </a>
+          </li>
+        <ul class="nav">
+          <li class="nav-item  ">
+            <a class="nav-link" href="Agregar.html">
+              <i class="material-icons">settings</i>
+              <p>Agregar</p>
+            </a>
+          </li>
+        <ul class="nav">
+          <li class="nav-item  ">
+            <a class="nav-link" href="Catalogo.html">
+              <i class="material-icons">collections_bookmark</i>
+              <p> Catalago</p>
+            </a>
+          </li>
+        <ul class="nav">
+          <li class="nav-item  ">
+            <a class="nav-link" href="datosTable.html">
+              <i class="material-icons">person</i>
+              <p>Cotizacion</p>
+            </a>
+          </li>
           <!-- your sidebar here -->
         </ul>
       </div>
-
     </div>
-    
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
@@ -95,106 +92,89 @@
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
-          
           <!-- your content here -->
           <div id="page-wrapper">
-                
-                <!-- /.row -->
-                <div class="card card-nav-tabs">
-                        <div class="card-header card-header-warning">
-                                <div class="panel-heading panel-heading-primary">
-                                        <i class="fa fa-database fa-fw"></i>Usuario registrados
-                                    </div>
-                        </div>
-                        <div class="card-body">
-                         
+            <!-- /.row -->
+            <div class="card card-nav-tabs">
+              <div class="card-header card-header-warning">
+                <div class="panel-heading panel-heading-primary">
+                  <i class="fa fa-database fa-fw"></i>Usuario registrados
+                </div>
+              </div>
+              <div class="card-body">  
                 <div class="row">
-                    <div class="col-lg-8">
-                        <div class="panel panel-default">
-                            
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                            <!-- Aquí pondremos el dataTable -->
-                                <table style="width: auto;" class="table table-hover table-bordered" id="usuarios">
-                                    <thead class="">
-                                        <tr class="">
-                                          <th colspan="2" class="text-center"> Datos del Usuario</th>
-                                          <th colspan="1" class="text-center">Acciones
-                                              
-                                          </th>
-                                        </tr>
-                                        <tr>
-                                          <th>Usuario</th>
-                                          <th>Contraseña</th>
-
-                                          <th> <button class="btn btn-danger" type="button" name="delete">
-                                                
-                                                <i class="material-icons">delete_forever</i>
-                                                </button></th>
-                                        </tr>
-                                        <tr>
-                                            
-                                                
-                                                     
-                                                    
-                                               
-                                            </td>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tablau">
-                                      <script type="text/javascript">
-                                      mostrar("Usuarios","tablau");
-                                      </script>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
+                  <div class="col-lg-8">
+                    <div class="panel panel-default">
+                      <!-- /.panel-heading -->
+                      <div class="panel-body">
+                      <!-- Aquí pondremos el dataTable -->
+                        <table style="width: auto;" class="table table-hover table-bordered" id="usuarios">
+                          <thead class="">
+                            <tr class="">
+                              <th colspan="2" class="text-center"> Datos del Usuario</th>
+                              <th colspan="1" class="text-center">Acciones</th>
+                            </tr>
+                              <tr>
+                                <th>Usuario</th>
+                                <th>Contraseña</th>
+                                <th> 
+                                  <button class="btn btn-danger" type="button" name="delete">   
+                                  <i class="material-icons">delete_forever</i>
+                                  </button>
+                                </th>
+                              </tr>
+                              <tr></tr>
+                            </thead>
+                            <tbody id="tablau">
+                              <script type="text/javascript">
+                                mostrar("Usuarios","tablau");
+                              </script>
+                            </tbody>
+                        </table>
+                      </div>
+                    <!-- /.panel-body -->
                     </div>
-                    <!-- /.col-lg-8 -->
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                                <div class="card card-nav-tabs">
-                                        <div class="card-header card-header-warning">
-                                                <div class="panel-heading panel-heading-primary">
-                                                        <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar usuario
-                                                    </div>
-                                                    
-                                        </div>
-                                        <br></br>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <form id="formDatospro" action="JavaScript:nuevo('Usuarios',['Nombre','contraseña'],'Usuario');" >
-                                    <div class="formImputs">
-                                      <div class="form-group">
-                                          <label for="">Usuario:</label>
-                                          <input type="text" class="form-control" id="Nombre" name="usuau" placeholder="nickname" required>
-                                      </div>
-                                      
-                                      <div class="form-group">
-                                          <label for="">Contraseña</label>
-                                          <input type="password" class="form-control" id="contraseña" name="contrau" placeholder="*******" required>
-                                      </div>
-                                      
-                                    </div>
-                                    <div class="formButtons">
-                                      <center>
-                                        <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddV" value="Agregar vendedor"></input>
-                                        <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
-                                      </center>
-                                    </div>
-                                </form>
-                            </div>
-                            <!-- /.panel-body -->
+                  </div>
+                  <!-- /.col-lg-8 -->
+                  <div class="col-lg-4">
+                    <div class="panel panel-default">
+                      <div class="card card-nav-tabs">
+                        <div class="card-header card-header-warning">
+                          <div class="panel-heading panel-heading-primary">
+                            <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar usuario
+                          </div>    
                         </div>
+                        <br></br>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                          <form id="formDatospro" action="JavaScript:nuevo('Usuarios',['Nombre','contraseña'],'Usuario');" >
+                            <div class="formImputs">
+                              <div class="form-group">
+                                <label for="">Usuario:</label>
+                                <input type="text" class="form-control" id="Nombre" name="usuau" placeholder="nickname" required>
+                              </div>  
+                              <div class="form-group">
+                                <label for="">Contraseña</label>
+                                <input type="password" class="form-control" id="contraseña" name="contrau" placeholder="*******" required>
+                              </div>
+                            </div>
+                            <div class="formButtons">
+                              <center>
+                                <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddV" value="Agregar vendedor"></input>
+                                <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
+                              </center>
+                            </div>
+                          </form>
+                        </div>
+                      <!-- /.panel-body -->
+                      </div>
                     </div>
                     <!-- /.col-lg-4 -->
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
+          </div>
         </div>
       </div>
       <footer class="footer">
@@ -203,7 +183,7 @@
             <ul>
               <li>
                 <a href="https://www.creative-tim.com">
-                  Creative Tim
+                Creative Tim
                 </a>
               </li>
             </ul>
@@ -221,7 +201,6 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  
   <script src="./assets/js/core/jquery.min.js"></script>
   <script src="./assets/js/core/popper.min.js"></script>
   <script src="./assets/js/core/bootstrap-material-design.min.js"></script>
