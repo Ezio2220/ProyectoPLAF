@@ -15,14 +15,25 @@ var Actual;
   var db = firebase.database();
 
   //root toma el nombre de la tabla donde se escribira y titulo toma un array de los campos que esta tenga
-  function nuevo(root,titulo,loc){//****************************************************FUNCION PARA GUARDAR
+  function nuevo(root,titulo,loc,sel=0,title=[0,0]){//****************************************************FUNCION PARA GUARDAR
     var data = firebase.database().ref(root);
     var obj = new Object();
+    
     if(root!="Usuarios"){
     var n;var n1;
     
     titulo.forEach(function(i){
-        obj[i]=document.getElementById(i).value;
+         console.log(i);
+        if(sel!=0){
+            
+            var j = document.getElementById(i).value;
+            console.log(j);
+            obj[i] = j.substring(0,j.length);
+            console.log(j +"-"+obj[i]);
+        }else{
+             obj[i]=document.getElementById(i).value;
+        }
+       
     });
     
     data.once("value", function(snap) {
@@ -39,7 +50,13 @@ var Actual;
         console.log(id);
        
         //console.log("hola");
-        var add = data.child(id);
+        var add;
+        if(sel!=0){
+            add = data.child(sel);
+        }else{
+            add = data.child(id);
+        }
+         
         add.set(obj);
         
     });       
@@ -48,8 +65,14 @@ var Actual;
         obj["Tipo"]="admin";
         data.child(document.getElementById("Nombre").value).set(obj);
     }
-    alert("GUARDADO!");
-    window.location=loc+".html";
+    if(sel==0){
+         alert("GUARDADO!");
+    }else{
+        alert("Actualizado");
+    }
+   
+    location.reload(true);
+    //window.location=loc+".html";
   }
   ////****************************************************FUNCION PARA ELIMINAR
   function borrar(root,id){
@@ -62,9 +85,71 @@ var Actual;
     alert("borrado");
     location.reload(true);
     }
+
+
+    function emptymodal(){
+        var x = document.getElementById("foredit");
+        x.innerHTML = "";
+    }
+    function geti(y){
+        var k = Array();
+        y.forEach(function(i){
+            console.log(document.getElementById(i).value);
+            k.push(document.getElementById(i).value);
+        });
+        return k;
+    }
 //****************************************************FUNCION PARA EDITAR
-    function edit(root,id){
-        alert("modificado"); 
+    function editar(root,id,n1=[0,0]){
+        var item = document.getElementById(id).value;
+        console.log(item);
+        console.log(n1);
+        var comp;
+        var y = Array();
+
+        n1.forEach(function(i){
+            i.id = i.id+"1";
+            y.push("\'"+i.id+"\'");
+            comp = i;
+        });
+        console.log(comp);
+       // console.log(comp.length);
+        if(comp.length == undefined){
+        var x = document.getElementById("foredit");
+        var code = id+"modal";
+        var modal = "<div class='modal fade' id='"+code+"' tabindex='-1' role='dialog' aria-labelledby='"+code+"' aria-hidden='true'>"+
+        "<div class='modal-dialog' role='document'>"+
+          "<div style='background-color: #1a2035;color : #8b92a9;' class='modal-content'>"+
+            "<div style='border-bottom: 1px solid #8b92a975;' class='modal-header'>"+
+              "<h5 class='modal-title' id='"+code+"'>"+root+" modal "+id+"</h5>"+
+              "<button onclick='emptymodal();' style='color: white;' type='button' class='close' data-dismiss='modal' aria-label='Close'>"+
+                "<span aria-hidden='true'>&times;</span>"+
+              "</button>"+
+            "</div> <form id = 'formedt' action=\"JavaScript:nuevo('"+root+"',["+y+"],'"+root+"','"+item+"',["+geti(y)+"]);\">"+
+            "<div class='modal-body'>";
+
+            n1.forEach(function(i){
+
+               modal += i.outerHTML;
+                console.log(i.outerHTML);
+            });
+            modal+=
+            "</div>"+
+            "<div style='border-top: 1px solid #8b92a975;' class='modal-footer'>"+
+              "<button onclick='emptymodal();'  type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>"+
+              "<button type='submit' class='btn btn-primary'>Actualizar</button>"+
+            "</div></form>"+
+          "</div>"+
+        "</div>"+
+      "</div>";
+      var options ;
+      x.innerHTML = modal;
+        console.log(modal);
+        console.log(code);
+      $("#"+code).modal(options);
+        }
+        
+        //alert("modificado"); 
     }
 //**************************************************** FUNCION PARA MOSTRAR EN TABLA!!!!
   function mostrar(root,table,n=[0,0]){
@@ -108,7 +193,7 @@ var Actual;
                 });
                 
                 x+="<td><button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
-                    "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
+                    "<button onclick="+"editar('"+root+"','edit"+i+"',["+n+"]);"+" id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
                     "</td> </tr>";
                 var acum = x.substring(0,x.length-5);
                 tot+=acum;
