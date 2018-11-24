@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script src="js/acciones.js"></script>
 </head>
 
 <body class="dark-edition">
@@ -113,7 +115,7 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body">
                             <!-- Aquí pondremos el dataTable -->
-                                <table class="table table-hover table-bordered" id="vendedores">
+                                <table style="width: auto;" class="table table-hover table-bordered" id="vendedores">
                                     <thead class="">
                                         <tr class="">
                                           <th colspan="7" class="text-center"> Datos del Vendedor</th>
@@ -135,7 +137,9 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tablav">
-                                         
+                                      <script type="text/javascript">
+                                        mostrar("Vendedores","tablav",["Nombre","Direccion","Telefono","DUI","Nit","Usuario","Contraseña"]);
+                                      </script>
                                     </tbody>
                                 </table>
                             </div>
@@ -155,36 +159,36 @@
                                         <br></br>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <form id="formDatospro" class="" action="" method="">
+                                <form id="formDatospro" class="" action="JavaScript:nuevo('Vendedores',['Nombre','Direccion','Telefono','DUI','Nit','Usuario','Contraseña'],'vend');" method="">
                                     <div class="formImputs">
                                       <div class="form-group">
                                           <label for="">Nombre:</label>
-                                          <input type="text" class="form-control" id="nomv" name="nomv" placeholder="Luis cordova">
+                                          <input type="text" class="form-control" id="Nombre" name="nomv" placeholder="Luis cordova">
                                       </div>
                                       
                                       <div class="form-group">
                                           <label for="">Direccion</label>
-                                          <input type="text" class="form-control" id="dirV" name="dirV" placeholder="10 Urbes, san miuel">
+                                          <input type="text" class="form-control" id="Direccion" name="dirV" placeholder="10 Urbes, san miuel">
                                       </div>
                                       <div class="form-group">
                                           <label for="">Telefono</label>
-                                          <input type="number" class="form-control" id="tev" name="tev" placeholder="1234-1233">
+                                          <input type="number" class="form-control" id="Telefono" name="tev" placeholder="1234-1233">
                                       </div>
                                       <div class="form-group">
                                           <label for="">Dui:</label>
-                                          <input type="text" class="form-control" id="duiv" name="duiv" placeholder="12345-0">
+                                          <input type="text" class="form-control" id="DUI" name="duiv" placeholder="12345-0">
                                       </div>
                                       <div class="form-group">
                                           <label for="">Nit:</label>
-                                          <input type="text" class="form-control" id="nitv" name="nitv" placeholder="12233-0">
+                                          <input type="text" class="form-control" id="Nit" name="nitv" placeholder="12233-0">
                                       </div>
                                       <div class="form-group">
                                             <label for="">usuario:</label>
-                                            <input type="text" class="form-control" id="usuav" name="usuav" placeholder="nickname">
+                                            <input type="text" class="form-control" id="Usuario" name="usuav" placeholder="nickname">
                                         </div>
                                         <div class="form-group">
                                                 <label for="">Contraseña:</label>
-                                                <input type="text" class="form-control" id="conv" name="conv" placeholder="******">
+                                                <input type="text" class="form-control" id="Contraseña" name="conv" placeholder="******">
                                             </div>
                                     </div>
                                     <div class="formButtons">

@@ -1,4 +1,8 @@
+ 
+ //var activo = 0;
+var Actual;
  // Initialize Firebase
+ 
  var config = {
     apiKey: "AIzaSyC5Fz7x6mupIKZ8IsyyKS7WRN6Hr_rVcK8",
     authDomain: "plaf-3cf84.firebaseapp.com",
@@ -11,7 +15,7 @@
   var db = firebase.database();
 
   //root toma el nombre de la tabla donde se escribira y titulo toma un array de los campos que esta tenga
-  function nuevo(root,titulo,loc){
+  function nuevo(root,titulo,loc){//****************************************************FUNCION PARA GUARDAR
     var data = firebase.database().ref(root);
     var obj = new Object();
     if(root!="Usuarios"){
@@ -47,11 +51,28 @@
     alert("GUARDADO!");
     window.location=loc+".html";
   }
+  ////****************************************************FUNCION PARA ELIMINAR
+  function borrar(root,id){
+     // console.log(root);
+     // console.log(id);
+      var data = firebase.database().ref(root);
+      var item = document.getElementById(id).value;
+     // console.log(item);
+      data.child(item).remove();
+    alert("borrado");
+    location.reload(true);
+    }
+//****************************************************FUNCION PARA EDITAR
+    function edit(root,id){
+        alert("modificado"); 
+    }
+//**************************************************** FUNCION PARA MOSTRAR EN TABLA!!!!
   function mostrar(root,table,n=[0,0]){
       var data = firebase.database().ref(root);
       var tbl = document.getElementById(table);
       var obj = new Object();
       var tot="";
+      var i=1;
       if(root=="Usuarios"){
           console.log("user");
             data.once("value", function(snap) {
@@ -63,13 +84,13 @@
                     x= "<tr> <td>"+documento+" </td>"+
                           "<td>"+aux[documento].contraseña+" </td>"+
                           "<td> "+
-                    "<button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
-                    "<button id='edit' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
+                    "<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
                     +"</td> </tr>"; 
                     var acum = x.substring(0,x.length-4);
                     tot+=acum;
                     //console.log(tot);
-                    
+                    i=i+1;
                 }
                 tbl.innerHTML = tot;
           }); 
@@ -83,13 +104,16 @@
                 x= "<tr>";
                 n.forEach(function(i){
                     x+="<td>"+xy[i]+"</td>"
+                    console.log(xy[i]);
                 });
-
-                x+="<button id='delete' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
-                    "<button id='edit' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
-                    " </tr>";
-                var acum = x.substring(0,x.length-4);
+                
+                x+="<td><button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
+                    "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
+                    "</td> </tr>";
+                var acum = x.substring(0,x.length-5);
                 tot+=acum;
+                console.log(tot);
+                i=i+1;
             }
             tbl.innerHTML = tot;
         }); 
@@ -97,7 +121,37 @@
       
 
   }
+  function SESSION(){
+    //var db = firebase.database().ref("Estado");
+        var db = firebase.database().ref("Usuarios");
+        var act = localStorage.getItem("Actual");
+        console.log(act);
+    db.once("value", function(snap) {
+        var aux = snap.val();
+         //console.log(aux["Actual"]);
+         if(aux[act].Estado == 0){
+            window.location="index.html";
+         }
+     /*   if(aux["Actual"]==0){
+            window.location="index.html";
+        }*/
+    });
+  }
+  
+  function close(){
+      console.log("cerrar sesion");
+      var act = localStorage.getItem("Actual");
+      var db = firebase.database().ref("Usuarios").child(act);
+      db.child("Estado").set(0);
+      /*firebase.database().ref("Estado");
+      db.child("Actual").set(0);
+      db.child("user").set("0");*/
+      alert("Cerrando sesion..");
+      window.location="index.html";
+  }
+
   function login(){
+    //var db = firebase.database().ref("Estado");
     var data = firebase.database().ref("Usuarios");
     var bandera = true;
     var name = document.getElementById("user").value;
@@ -111,6 +165,11 @@
                 bandera=false;
                 if(pass == aux[documento].contraseña){
                     alert("Correcto");
+                    data.child(name).child("Estado").set(1);
+                    this.Actual = name;
+                    localStorage.setItem("Actual",name);
+                    //db.child("Actual").set(1);
+                    //db.child("user").set(name);
                     window.location="Principal.html";
                 }else{
                     
@@ -123,6 +182,5 @@
        }
        
     });  
-
 
   }

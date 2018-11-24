@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script src="js/acciones.js"></script>
 </head>
 
 <body class="dark-edition">
@@ -49,6 +51,13 @@
                         <p> Catalago</p>
                       </a>
                     </li>
+                    <ul class="nav">
+                      <li class="nav-item  ">
+                        <a class="nav-link" href="datosTable.html">
+                          <i class="material-icons">person</i>
+                          <p>Cotizacion</p>
+                        </a>
+                      </li>
           <!-- your sidebar here -->
         </ul>
       </div>
@@ -123,7 +132,9 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tablaP">
-                                         
+                                        <script type="text/javascript">
+                                        mostrar("Producto","tablaP",["Nombre","Precio","Descripcion","Marca","Categoria"]);
+                                        </script>                 
                                     </tbody>
                                 </table>
                             </div>
@@ -143,28 +154,28 @@
                                         <br></br>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <form id="formDatospro" class="" action="" method="">
+                                <form id="formDatospro" class="" action="JavaScript:nuevo('Producto',['Nombre','Precio','Descripcion','Marca','Categoria'],'producto');" method="">
                                     <div class="formImputs">
                                       <div class="form-group">
                                           <label for="">Nombre:</label>
-                                          <input type="text" class="form-control" id="nomP" name="nomP" placeholder="Mouse">
+                                          <input type="text" class="form-control" id="Nombre" name="nomP" placeholder="Mouse">
                                       </div>
                                       
                                       <div class="form-group">
                                           <label for="">Precio</label>
-                                          <input type="number" class="form-control" id="precioP" name="precioP" placeholder="$99.9">
+                                          <input type="number" class="form-control" id="Precio" name="precioP" placeholder="$99.9">
                                       </div>
                                       <div class="form-group">
                                           <label for="">Descripcion:</label>
-                                          <input type="text" class="form-control" id="descripcionP" name="descripcionP" placeholder="complementos">
+                                          <input type="text" class="form-control" id="Descripcion" name="descripcionP" placeholder="complementos">
                                       </div>
                                       <div class="form-group">
                                           <label for="">Marca:</label>
-                                          <input type="text" class="form-control" id="marcaP" name="marcaP" placeholder="HP">
+                                          <input type="text" class="form-control" id="Marca" name="marcaP" placeholder="HP">
                                       </div>
                                       <div class="form-group">
                                           <label for="">Categoria:</label>
-                                          <input type="text" class="form-control" id="categoriaP" name="categoriaP" placeholder="hardvard">
+                                          <input type="text" class="form-control" id="Categoria" name="categoriaP" placeholder="hardvard">
                                       </div>
                                       
                                     </div>
