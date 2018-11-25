@@ -67,208 +67,199 @@
     <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
       <div class="container-fluid">
         <div class="navbar-wrapper">
-            <div class="row">
-                <div class="col-sm-2 ml-auto">
-                   
-                    <img src="assets/img/logo.png" alt="Circle Image" class="rounded-circle img-fluid">
-                  </div>
-                </div>
-        </div>
-      </nav>
-      <!-- End Navbar -->
-      <div class="fixed-plugin">
-        <div class="dropdown show-dropdown">
-          <a href="#" data-toggle="dropdown" aria-expanded="false"  style="height:70px;">
-            <i class="material-icons">contact_support</i>
-          </a>
-          <ul class="dropdown-menu" x-placement="top-start" style="position: absolute; top: -110px; left: -231px; will-change: top, left;">
-            <li class="header-title">Color</li>
-            <li class="adjustments-line">
-              <a href="javascript:void(0)" class="switch-trigger active-color">
-                <div class="badge-colors ml-auto mr-auto">
-                  <span class="badge filter badge-purple" data-color="purple"></span>
-                  <span class="badge filter badge-azure" data-color="azure"></span>
-                  <span class="badge filter badge-green" data-color="green"></span>
-                  <span class="badge filter badge-warning" data-color="orange"></span>
-                  <span class="badge filter badge-danger active" data-color="danger"></span>
-                </div>
-                <div class="clearfix"></div>
-              <div class="ripple-container"></div></a>
-            </li>
-            <li class="header-title">Fondo</li>
-            <li>
-              <a class="img-holder switch-trigger" href="javascript:void(0)">
-                <img src="assets/img/ma (1).jpg" alt="">
-              </a>
-            </li>
-            <li class="active">
-              <a class="img-holder switch-trigger" href="javascript:void(0)">
-                <img src="assets/img/dee.jpg" alt="">
-              </a>
-            </li>
-            <li>
-              <a class="img-holder switch-trigger" href="javascript:void(0)">
-                <img src="assets/img/proo.jpg" alt="">
-              </a>
-            </li>
-            <li class="button-container">
-              <a href="" target="_blank" class="btn btn-default btn-block" >
-                Ver manual
-              </a>
-            </li>
-            <li class="button-container">
-              <a href="javaScript:close();" target="_blank" class="btn btn-primary btn-block" id="Salir">
-                Salir
-              </a>
-            </li>
-           
-          </ul>
-        </div>
-      </div>
-      <div class="content">
-        <div class="container-fluid">
-          <!-- your content here -->
-          <div id="page-wrapper">
-                
-                <!-- /.row -->
-                <div class="card card-nav-tabs">
-                        <div class="card-header card-header-warning">
-                                <div class="panel-heading panel-heading-primary">
-                                        <i class="fa fa-database fa-fw"></i>Vendedores Registrados
-                                    </div>
-                        </div>
-                        <div class="card-body">
-                         
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="panel panel-default">
-                            
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                            <!-- Aquí pondremos el dataTable -->
-                                <table style="width: auto;" class="table table-hover table-bordered" id="vendedores">
-                                    <thead class="">
-                                        <tr class="">
-                                          <th colspan="7" class="text-center"> Datos del Vendedor</th>
-                                          <th colspan="1" class="text-center">Acciones</th>
-                                        </tr>
-                                        <tr>
-                                          <th>Nombre</th>
-                                          <th>Direccion</th>
-                                          <th>Telefono</th>
-                                          <th>DUI</th>
-                                          <th>Nit</th>
-                                          <th>Usuario</th>
-                                          <th>Contraseña</th>
-
-
-                                         
-                                         
-                                          <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tablav">
-                                      <script type="text/javascript">
-                                        mostrar("Vendedores","tablav",["Nombre","Direccion","Telefono","DUI","Nit","Usuario","Contraseña"]);
-                                      </script>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                    </div>
-                  <!-- /.panel-body -->
-                  <!-- /.col-lg-8 -->
-                <div class="col-lg-3">
-                    <div class="panel panel-default">
-                      <div style="margin-left: 40%;" class="card card-nav-tabs">
-                        <div class="card-header card-header-warning">
-                          <div class="panel-heading panel-heading-primary">
-                              <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar vendedor
-                          </div>  
-                        </div>
-                        <br></br>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                          <form id="formDatospro" class="" action="JavaScript:nuevo('Vendedores',['Nombre','Direccion','Telefono','DUI','Nit','Usuario','Contraseña'],'vend');" method="">
-                            <div class="formImputs">
-                              <div class="form-group">
-                                <label for="">Nombre:</label>
-                                <input type="text" class="form-control" id="Nombre" name="nomv" placeholder="Luis cordova">
-                              </div>
-                              <div class="form-group">
-                                <label for="">Direccion</label>
-                                <input type="text" class="form-control" id="Direccion" name="dirV" placeholder="10 Urbes, san miuel">
-                              </div>
-                              <div class="form-group">
-                                <label for="">Telefono</label>
-                                <input type="number" class="form-control" id="Telefono" name="tev" placeholder="1234-1233">
-                              </div>
-                              <div class="form-group">
-                                <label for="">Dui:</label>
-                                <input type="text" class="form-control" id="DUI" name="duiv" placeholder="12345-0">
-                              </div>
-                              <div class="form-group">
-                                <label for="">Nit:</label>
-                                <input type="text" class="form-control" id="Nit" name="nitv" placeholder="12233-0">
-                              </div>
-                              <div class="form-group">
-                                <label for="">usuario:</label>
-                                <input type="text" class="form-control" id="Usuario" name="usuav" placeholder="nickname">
-                              </div>
-                              <div class="form-group">
-                                <label for="">Contraseña:</label>
-                                <input type="text" class="form-control" id="Contraseña" name="conv" placeholder="******">
-                              </div>
-                            </div>
-                            <div class="formButtons">
-                              <center>
-                                <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddV" value="Agregar vendedor"></input>
-                                <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
-                              </center>
-                            </div>
-                          </form>
-                        </div>
-                      <!-- /.panel-body -->
-                      </div>
-                    </div>
-                  <!-- /.col-lg-4 -->
-                  </div>
-                  </div>
-                </div>
-                
-              </div>
+          <div class="row">
+            <div class="col-sm-2 ml-auto"> 
+              <img src="assets/img/logo.png" alt="Circle Image" class="rounded-circle img-fluid">
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <footer class="footer">
-      <div class="container-fluid">
-        <nav class="float-left">
-          <ul>
-            <li>
-              <a href="https://www.creative-tim.com">
-                Creative Tim
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <div class="copyright float-right">
-          &copy;
-          <script>
-            document.write(new Date().getFullYear())
-          </script>, made with <i class="material-icons">favorite</i> by
-          <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-        </div>
-        <!-- your footer here -->
+    </nav>
+    <!-- End Navbar -->
+    <div class="fixed-plugin">
+      <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown" aria-expanded="false"  style="height:70px;">
+          <i class="material-icons">contact_support</i>
+        </a>
+        <ul class="dropdown-menu" x-placement="top-start" style="position: absolute; top: -110px; left: -231px; will-change: top, left;">
+          <li class="header-title">Color</li>
+          <li class="adjustments-line">
+            <a href="javascript:void(0)" class="switch-trigger active-color">
+              <div class="badge-colors ml-auto mr-auto">
+                <span class="badge filter badge-purple" data-color="purple"></span>
+                <span class="badge filter badge-azure" data-color="azure"></span>
+                <span class="badge filter badge-green" data-color="green"></span>
+                <span class="badge filter badge-warning" data-color="orange"></span>
+                <span class="badge filter badge-danger active" data-color="danger"></span>
+              </div>
+              <div class="clearfix"></div>
+            <div class="ripple-container"></div></a>
+          </li>
+          <li class="header-title">Fondo</li>
+          <li>
+            <a class="img-holder switch-trigger" href="javascript:void(0)">
+              <img src="assets/img/ma (1).jpg" alt="">
+            </a>
+          </li>
+          <li class="active">
+            <a class="img-holder switch-trigger" href="javascript:void(0)">
+              <img src="assets/img/dee.jpg" alt="">
+            </a>
+          </li>
+          <li>
+            <a class="img-holder switch-trigger" href="javascript:void(0)">
+              <img src="assets/img/proo.jpg" alt="">
+            </a>
+          </li>
+          <li class="button-container">
+            <a href="" target="_blank" class="btn btn-default btn-block" >
+              Ver manual
+            </a>
+          </li>
+          <li class="button-container">
+            <a href="javaScript:close();" target="_blank" class="btn btn-primary btn-block" id="Salir">
+              Salir
+            </a>
+          </li>
+          
+        </ul>
       </div>
-    </footer>
-  </div>
-  </div>
-  <div id="foredit">
-    
     </div>
+    <div class="content">
+      <div class="container-fluid">
+        <!-- your content here -->
+        <div id="page-wrapper">      
+          <!-- /.row -->
+          <div class="card card-nav-tabs">
+            <div class="card-header card-header-warning">
+              <div class="panel-heading panel-heading-primary">
+                <i class="fa fa-database fa-fw"></i>Vendedores Registrados
+              </div>
+            </div>
+            <div class="card-body">             
+              <div class="row">
+                <div class="col-lg-8">
+                  <div class="panel panel-default">           
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                      <!-- Aquí pondremos el dataTable -->
+                      <table style="width: auto;" class="table table-hover table-bordered" id="vendedores">
+                          <thead class="">
+                            <tr class="">
+                              <th colspan="7" class="text-center"> Datos del Vendedor</th>
+                              <th colspan="1" class="text-center">Acciones</th>
+                            </tr>
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Direccion</th>
+                              <th>Telefono</th>
+                              <th>DUI</th>
+                              <th>Nit</th>
+                              <th>Usuario</th>
+                              <th>Contraseña</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody id="tablav">
+                            <script type="text/javascript">
+                              mostrar("Vendedores","tablav",["Nombre","Direccion","Telefono","DUI","Nit","Usuario","Contraseña"]);
+                            </script>
+                          </tbody>
+                      </table>
+                    </div>
+                  <!-- /.panel-body -->
+                  </div>
+                </div>
+                <!-- /.panel-body -->
+                <!-- /.col-lg-8 -->
+                <div class="col-lg-3">
+                  <div class="panel panel-default">
+                    <div style="margin-left: 40%;" class="card card-nav-tabs">
+                      <div class="card-header card-header-warning">
+                        <div class="panel-heading panel-heading-primary">
+                          <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar vendedor
+                        </div>  
+                      </div>
+                      <br></br>
+                      <!-- /.panel-heading -->
+                      <div class="panel-body">
+                        <form id="formDatospro" class="" action="JavaScript:nuevo('Vendedores',['Nombre','Direccion','Telefono','DUI','Nit','Usuario','Contraseña'],'vend');" method="">
+                          <div class="formImputs">
+                            <div class="form-group">
+                              <label for="">Nombre:</label>
+                              <input type="text" class="form-control" id="Nombre" name="nomv" placeholder="Luis cordova">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Direccion</label>
+                              <input type="text" class="form-control" id="Direccion" name="dirV" placeholder="10 Urbes, san miuel">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Telefono</label>
+                              <input type="number" class="form-control" id="Telefono" name="tev" placeholder="1234-1233">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Dui:</label>
+                              <input type="text" class="form-control" id="DUI" name="duiv" placeholder="12345-0">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Nit:</label>
+                              <input type="text" class="form-control" id="Nit" name="nitv" placeholder="12233-0">
+                            </div>
+                            <div class="form-group">
+                              <label for="">usuario:</label>
+                              <input type="text" class="form-control" id="Usuario" name="usuav" placeholder="nickname">
+                            </div>
+                            <div class="form-group">
+                              <label for="">Contraseña:</label>
+                              <input type="text" class="form-control" id="Contraseña" name="conv" placeholder="******">
+                            </div>
+                          </div>
+                          <div class="formButtons">
+                            <center>
+                              <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddV" value="Agregar vendedor"></input>
+                              <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
+                            </center>
+                          </div>
+                        </form>
+                      </div>
+                      <!-- /.panel-body -->
+                    </div>
+                  </div>
+                <!-- /.col-lg-4 -->
+                </div>
+              </div>
+            </div>   
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <footer class="footer">
+    <div class="container-fluid">
+      <nav class="float-left">
+        <ul>
+          <li>
+            <a href="https://www.creative-tim.com">
+              Creative Tim
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div class="copyright float-right">
+        &copy;
+        <script>
+          document.write(new Date().getFullYear())
+        </script>, made with <i class="material-icons">favorite</i> by
+        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+      </div>
+        <!-- your footer here -->
+    </div>
+  </footer>
+  </div>
+  </div>
+  <div id="foredit">  
+  </div>
   <!--   Core JS Files   -->
   <script src="./assets/js/core/jquery.min.js"></script>
   <script src="./assets/js/core/popper.min.js"></script>
