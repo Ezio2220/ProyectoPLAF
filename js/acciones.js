@@ -255,18 +255,59 @@ function subtotal(from,to){
     var o1 = document.getElementById(from).value;
     var sub = document.getElementById(to);
     var o2 = sub.name;
-    console.log("1: "+o1+" 2:"+o2);
+    var tot = document.getElementById("Total");
+    var tdata = parseFloat(tot.value);
+    
+   // console.log("1: "+o1+" 2:"+o2);
     var o = parseFloat(o2);
     var op = parseFloat(o1);
-    console.log("a: "+o+" b: "+op);
+    var total = parseFloat(tdata-sub.value)+parseFloat(o*op);
+    //console.log("a: "+o+" b: "+op);
     sub.value = parseFloat(o*op);
-    console.log( o*op);
+    tot.value = parseFloat(total);
+    //console.log( o*op);
+}
+function cotizar(v,c,f,p,t){
+    var data = firebase.database().ref("Cotizaciones");
+    var vendedor = document.getElementById(v).value;
+    var cliente = document.getElementById(c).value;
+    var fecha = document.getElementById(f).title;
+    var total = "$"+document.getElementById(t).value;  
+    var obj2 = document.getElementById(p).value;
+    var obj = new Object();
+    obj["IDC"]=cliente.substring(1);
+    obj["IDV"]=vendedor;
+    obj["precio"]=total;
+    obj["Fecha_cot"]=fecha;
+    obj["codigo"]=obj2;
+    data.once("value", function(snap) {
+        var aux = snap.val();
+        for(var documento in aux){
+            //print(datosArray[documento].Nombre);
+            console.log(documento);
+            n=documento;
+            n1= parseInt(n.substring(2))+1;
+        }
+      //  console.log(n);
+        console.log(n1);
+        id="id"+n1;
+        console.log(id);
+        var add
+        add = data.child(id);
+        add.set(obj);
+        alert("cotizacion guardada!");
+    });
+    //console.log(obj);
+    //console.log(fecha);
+    //console.log(total);
+    
+
 }
 function traspaso(n1,n2){
     var p = firebase.database().ref("Producto");
     var s = firebase.database().ref("Servicio");
     var table = document.getElementById("tablac");
-    var add=""; var acum=0;
+    var add=""; var acum=0;var sum=0;
     
     if(n2>0){
         var servicios = JSON.parse(localStorage.getItem("ser"));
@@ -278,8 +319,9 @@ function traspaso(n1,n2){
                     acum+=1;    
                     console.log(acum);
                     if(documento==i){
+                        sum+=parseFloat(aux[documento].Precio);
                         add+="<tr><td><input min='1' onchange=\"subtotal('cant"+acum+"','sub"+acum+"')\" type='number' class='form-control' id='cant"+acum+"' name='canti' value='1'> </td>"+
-                        "<td>";
+                        "<td id='S"+documento+"'>";
                         add+= aux[documento].Nombre + " : "+aux[documento].Descripcion+" (duracion: "+aux[documento].Duracion+" dias)</td>"+
                         "<td> <input class='form-control' disabled Value='"+aux[documento].Precio+"' type='number' name='"+aux[documento].Precio+"'  id='sub"+acum+"' > </td></tr>";
                         table.innerHTML += add;
@@ -287,6 +329,11 @@ function traspaso(n1,n2){
                         add="";
                     }
                 });
+            }
+            if(true){
+                add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='number' name='total'  id='Total' ></td></tr>";
+                table.innerHTML+=add;
+                sum=0;
             }
         });
     }
@@ -300,8 +347,9 @@ function traspaso(n1,n2){
                     acum+=1;    
                     console.log(acum);
                     if(documento==i){
+                        sum+=parseFloat(aux[documento].Precio);
                         add+="<tr><td><input min='1' onchange=\"subtotal('cant"+acum+"','sub"+acum+"')\" type='number' class='form-control' id='cant"+acum+"' name='canti' value='1'> </td>"+
-                        "<td>";
+                        "<td id='P"+documento+"'>";
                         add+= aux[documento].Nombre +" "+aux[documento].Marca+ " : "+aux[documento].Descripcion+" </td>"+
                         "<td><input class='form-control' disabled Value='"+aux[documento].Precio+"' type='number' name='"+aux[documento].Precio+"'  id='sub"+acum+"' > </td></tr>";
                         table.innerHTML += add;
@@ -310,14 +358,20 @@ function traspaso(n1,n2){
                     }
                 });
             }
+            if(n2==0){
+            add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='number' name='total'  id='Total' ></td></tr>";
+            //add+="<input class='form-control' disabled Value='"+sum2+"' type='number' name='productos'  id='Total' >";
+            table.innerHTML+=add;
+            sum=0;
+            }
+            
         });
     }
     if(n1==0 && n2==0){
         alert("debe seleccionar almenos 1 servicio y/o Producto");
         window.location="Catalogo.html";
     }
-
-
+    
 }
 function Catalogo(){
       var data = firebase.database();
@@ -485,7 +539,7 @@ function Catalogo(){
     });
 
   }
-  function combox(root,fields=[0,0],target,ty=0){
+  function combox(root,fields=[0,0],target,){
     var db = firebase.database().ref(root);
     var targ = document.getElementById(target);
     var add="";
@@ -493,24 +547,58 @@ function Catalogo(){
         var aux = snap.val();
         for(var documento in aux){
             var xy = aux[documento];
-            if(ty=="0"){
-            add+="<option value='"+documento+"' class='form-control'>";
+            
+            add+="<option name='"+root.substring(0,1)+"' style='color: #202940;' value='"+root.substring(0,1)+documento+"'>";
             fields.forEach(function(i){
                 add+=xy[i]+" ";
             });
             add+="</option>";
-            }else{
-                add+="<option class='form-control' value='";
-                fields.forEach(function(i){
-                    add+=xy[i]+" ";
-                });
-                add+="'>";
-            }
+            
             targ.innerHTML += add;
             add="";
         }
 
     });    
+
+  }
+  function addcot(idc=0){
+    if(idc==0){
+        alert("debe seleccionar un producto/servicio");
+    }else{
+    var idn = document.getElementById(idc).value;
+    var n = idn.substring(0,1);
+    var id = idn.substring(1);
+    if(n=="P"){
+        if(parseInt(localStorage.getItem("n1"))>0){
+            var producto = JSON.parse(localStorage.getItem("pro"));
+        }else{
+            var producto = Array();
+            
+        }
+        
+        var nk1 = parseInt(localStorage.getItem("n1"))+1;
+        localStorage.setItem("n1",nk1);
+        producto.push(id);
+       
+        localStorage.setItem("pro",JSON.stringify(producto));
+        
+    }
+    else if(n=="S"){
+        if(parseInt(localStorage.getItem("n2"))>0){
+            var servicio = JSON.parse(localStorage.getItem("ser"));
+        }else{
+            var servicio = new Array();
+        }
+        
+        var nk2 = parseInt(localStorage.getItem("n2"))+1;
+        localStorage.setItem("n2",nk2);
+        servicio.push(id);
+        localStorage.setItem("ser",JSON.stringify(servicio));
+        console.log("SERVICIO");
+    }
+    location.reload(true);
+    }
+    
 
   }
   function close(){
@@ -558,4 +646,12 @@ function Catalogo(){
        
     });  
 
+  }
+
+  function genPdf(div){
+
+    var pd = new jsPDF();
+    pd.fromHTML( $('#'+div).get(0), 20,20,{
+        'width':500});
+    pd.save('prueba.pdf');
   }
