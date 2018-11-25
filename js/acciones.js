@@ -87,16 +87,7 @@ var Actual;
         var x = document.getElementById("foredit");
         x.innerHTML = "";
     }
-    /*function geti(y){
-        var k = Array();
 
-        y.forEach(function(i){
-            console.log(i);
-            console.log(document.getElementById("Nit1").value);
-            k.push(document.getElementById(i).value);
-        });
-        return k;
-    }*/
 //****************************************************FUNCION PARA EDITAR
 function edt(root,titulo,loc,sel=0,title=[0,0]){//****************************************************FUNCION PARA GUARDAR
     var data = firebase.database().ref(root);
@@ -219,10 +210,294 @@ function editar(root,id,n1=[0,0]){
             }
             tbl.innerHTML = tot;
         }); 
-      }
-      
-
+      }  
   }
+function pasar(arr){
+   // alert(arr);
+    var objp = new Array();
+    var objs = new Array();
+    console.log(arr);
+    var npro=0;
+    var nser=0;
+    arr.forEach(function(i){
+        var x = document.getElementById(i);
+        if(x.checked){
+           
+           if(i.substring(0,3)=="ser"){
+            nser+=1;
+            objs.push(x.value)   
+           }else{
+               npro+=1;
+               objp.push(x.value)
+           }
+            //console.log(x.value);
+        }
+    });
+    localStorage.setItem("pro","");
+    localStorage.setItem("ser","");
+    console.log("p: "+npro+" s: "+nser);
+    if(npro>0){
+        localStorage.setItem("pro",JSON.stringify(objp));
+    }
+    if(nser>0){
+        localStorage.setItem("ser",JSON.stringify(objs));
+    }
+    localStorage.setItem("n1",npro);
+    localStorage.setItem("n2",nser);
+    console.log("P");
+    console.log(localStorage.getItem("pro"));
+    console.log("S");
+    console.log(localStorage.getItem("ser"));
+    window.location="datosTable.html";
+    //localStorage.setItem("Cot",obj);
+}
+function subtotal(from,to){
+    var o1 = document.getElementById(from).value;
+    var sub = document.getElementById(to);
+    var o2 = sub.name;
+    var tot = document.getElementById("Total");
+    var tdata = parseFloat(tot.value);
+    
+   // console.log("1: "+o1+" 2:"+o2);
+    var o = parseFloat(o2);
+    var op = parseFloat(o1);
+    var total = parseFloat(tdata-sub.value)+parseFloat(o*op);
+    //console.log("a: "+o+" b: "+op);
+    sub.value = parseFloat(o*op);
+    tot.value = parseFloat(total);
+    //console.log( o*op);
+}
+function cotizar(v,c,f,p,t){
+    var data = firebase.database().ref("Cotizaciones");
+    var vendedor = document.getElementById(v).value;
+    var cliente = document.getElementById(c).value;
+    var fecha = document.getElementById(f).title;
+    var total = "$"+document.getElementById(t).value;  
+    var obj2 = document.getElementById(p).value;
+    var obj = new Object();
+    obj["IDC"]=cliente.substring(1);
+    obj["IDV"]=vendedor;
+    obj["precio"]=total;
+    obj["Fecha_cot"]=fecha;
+    obj["codigo"]=obj2;
+    data.once("value", function(snap) {
+        var aux = snap.val();
+        for(var documento in aux){
+            //print(datosArray[documento].Nombre);
+            console.log(documento);
+            n=documento;
+            n1= parseInt(n.substring(2))+1;
+        }
+      //  console.log(n);
+        console.log(n1);
+        id="id"+n1;
+        console.log(id);
+        var add
+        add = data.child(id);
+        add.set(obj);
+        alert("cotizacion guardada!");
+    });
+    //console.log(obj);
+    //console.log(fecha);
+    //console.log(total);
+    
+
+}
+function traspaso(n1,n2){
+    var p = firebase.database().ref("Producto");
+    var s = firebase.database().ref("Servicio");
+    var table = document.getElementById("tablac");
+    var add=""; var acum=0;var sum=0;
+    
+    if(n2>0){
+        var servicios = JSON.parse(localStorage.getItem("ser"));
+        s.once("value", function(snap) {
+            var aux = snap.val();
+            for(var documento in aux){
+                
+                servicios.forEach(function(i){
+                    acum+=1;    
+                    console.log(acum);
+                    if(documento==i){
+                        sum+=parseFloat(aux[documento].Precio);
+                        add+="<tr><td><input style='background-color: #202940;' min='1' onchange=\"subtotal('cant"+acum+"','sub"+acum+"')\" type='number' class='form-control' id='cant"+acum+"' name='canti' value='1'> </td>"+
+                        "<td id='S"+documento+"'>";
+                        add+= aux[documento].Nombre + " : "+aux[documento].Descripcion+" (duracion: "+aux[documento].Duracion+" dias)</td>"+
+                        "<td> <input style='background-color: #202940;' class='form-control' disabled Value='"+aux[documento].Precio+"' type='number' name='"+aux[documento].Precio+"'  id='sub"+acum+"' > </td></tr>";
+                        table.innerHTML += add;
+                        console.log(add);
+                        add="";
+                    }
+                });
+            }
+            if(true){
+                add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='number' name='total'  id='Total' ></td></tr>";
+                table.innerHTML+=add;
+                sum=0;
+            }
+        });
+    }
+    if(n1>0){
+        var productos = JSON.parse(localStorage.getItem("pro"));
+        p.once("value", function(snap) {
+            var aux = snap.val();
+            for(var documento in aux){
+                
+                productos.forEach(function(i){
+                    acum+=1;    
+                    console.log(acum);
+                    if(documento==i){
+                        sum+=parseFloat(aux[documento].Precio);
+                        add+="<tr><td><input min='1' onchange=\"subtotal('cant"+acum+"','sub"+acum+"')\" type='number' class='form-control' id='cant"+acum+"' name='canti' value='1'> </td>"+
+                        "<td id='P"+documento+"'>";
+                        add+= aux[documento].Nombre +" "+aux[documento].Marca+ " : "+aux[documento].Descripcion+" </td>"+
+                        "<td><input class='form-control' disabled Value='"+aux[documento].Precio+"' type='number' name='"+aux[documento].Precio+"'  id='sub"+acum+"' > </td></tr>";
+                        table.innerHTML += add;
+                        console.log(add);
+                        add="";
+                    }
+                });
+            }
+            if(n2==0){
+            add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='number' name='total'  id='Total' ></td></tr>";
+            //add+="<input class='form-control' disabled Value='"+sum2+"' type='number' name='productos'  id='Total' >";
+            table.innerHTML+=add;
+            sum=0;
+            }
+            
+        });
+    }
+    if(n1==0 && n2==0){
+        alert("debe seleccionar almenos 1 servicio y/o Producto");
+        window.location="Catalogo.html";
+    }
+    
+}
+function Catalogo(){
+      var data = firebase.database();
+      var pro = data.ref("Producto");
+      var ser = data.ref("Servicio");
+      var add="";
+      var content = document.getElementById("items");
+      var n = 0;
+      var arr = new Array();
+      ser.once("value", function(snap) {
+        var aux = snap.val();
+       // content.innerHTML += "<div class='row'>";
+        for(var documento in aux){
+            n+=1;
+            arr.push("\'ser"+n+"\'");
+            add="<div class='col md-4'>"+            
+            "<div style='width: max-content;' class='card card-nav-tabs'>"+
+              "<h4 class='card-header card-header-info'>"+aux[documento].Nombre+"</h4>"+
+              "<div class='card-body'>"+
+                "<div id='S"+documento+"' class='carousel slide' data-ride='carousel'>"+
+                  "<ol class='carousel-indicators'>"+
+                    "<li data-target='#S"+documento+"' data-slide-to='0' class='active'></li>"+
+                    "<li data-target='#S"+documento+"' data-slide-to='1'></li>"+
+                    "<li data-target='#S"+documento+"' data-slide-to='2'></li>"+
+                  "</ol>"+
+                  "<div class='carousel-inner'>"+
+                    "<div class='carousel-item active'>"+
+                      "<img class='d-block w-10' src='img/pro2.jpg' alt='First slide'>"+
+                    "</div>"+
+                    "<div class='carousel-item'>"+
+                      "<img class='d-block w-100' src='img/pro2b.jpg' alt='Second slide'>"+
+                    "</div>"+
+                    "<div class='carousel-item'>"+
+                      "<img class='d-block w-100' src='img/pro2c.jpg' alt='Third slide'>"+
+                    "</div>"+
+                  "</div>"+
+                  "<a class='carousel-control-prev' href='#S"+documento+"' role='button' data-slide='prev'>"+
+                    "<span class='carousel-control-prev-icon' aria-hidden='true'></span>"+
+                    "<span class='sr-only'>Previous</span>"+
+                  "</a>"+
+                  "<a class='carousel-control-next' href='#S"+documento+"' role='button' data-slide='next'>"+
+                    "<span class='carousel-control-next-icon' aria-hidden='true'></span>"+
+                    "<span class='sr-only'>Next</span>"+
+                  "</a>"+
+          "</div>"+
+                "<p class='card-text'>esta es una descripcion del producto.</p>"+
+              "</div>"+
+              "<div class='card-footer'>"+
+                  "<div class='stats'>"+
+                      "<div class='form-check'>"+
+                          "<label class='form-check-label'>"+
+                            "<input id='ser"+n+"' class='form-check-input' type='checkbox' value='"+documento+"'>"+
+                             "AGREGAR A LA BOLSA"+
+                            "<span class='form-check-sign'>"+
+                              "<span class='check'></span>"+
+                            "</span>"+
+                          "</label>"+
+                        "</div>"+
+                  "</div>"+
+              "</div>"+
+            "</div>"+ 
+          "</div>";
+          content.innerHTML += add;
+        }
+      });
+      pro.once("value", function(snap) {
+        var aux = snap.val();
+       // content.innerHTML += "<div class='row'>";
+        for(var documento in aux){
+            n+=1;
+            arr.push("\'pro"+n+"\'");
+            add="<div class='col md-4'>"+            
+            "<div style='width: max-content;' class='card card-nav-tabs'>"+
+              "<h4 class='card-header card-header-info'>"+aux[documento].Nombre+"</h4>"+
+              "<div class='card-body'>"+
+                "<div id='P"+documento+"' class='carousel slide' data-ride='carousel'>"+
+                  "<ol class='carousel-indicators'>"+
+                    "<li data-target='#P"+documento+"' data-slide-to='0' class='active'></li>"+
+                    "<li data-target='#P"+documento+"' data-slide-to='1'></li>"+
+                    "<li data-target='#P"+documento+"' data-slide-to='2'></li>"+
+                  "</ol>"+
+                  "<div class='carousel-inner'>"+
+                    "<div class='carousel-item active'>"+
+                      "<img class='d-block w-10' src='img/pro1.jpg' alt='First slide'>"+
+                    "</div>"+
+                    "<div class='carousel-item'>"+
+                      "<img class='d-block w-100' src='img/pro1b.jpg' alt='Second slide'>"+
+                    "</div>"+
+                    "<div class='carousel-item'>"+
+                      "<img class='d-block w-100' src='img/pro1c.jpg' alt='Third slide'>"+
+                    "</div>"+
+                  "</div>"+
+                  "<a class='carousel-control-prev' href='#P"+documento+"' role='button' data-slide='prev'>"+
+                    "<span class='carousel-control-prev-icon' aria-hidden='true'></span>"+
+                    "<span class='sr-only'>Previous</span>"+
+                  "</a>"+
+                  "<a class='carousel-control-next' href='#P"+documento+"' role='button' data-slide='next'>"+
+                    "<span class='carousel-control-next-icon' aria-hidden='true'></span>"+
+                    "<span class='sr-only'>Next</span>"+
+                  "</a>"+
+          "</div>"+
+                "<p class='card-text'>esta es una descripcion del producto.</p>"+
+              "</div>"+
+              "<div class='card-footer'>"+
+                  "<div class='stats'>"+
+                      "<div class='form-check'>"+
+                          "<label class='form-check-label'>"+
+                            "<input id='pro"+n+"'  class='form-check-input' type='checkbox' value='"+documento+"'>"+
+                             "AGREGAR A LA BOLSA"+
+                            "<span class='form-check-sign'>"+
+                              "<span class='check'></span>"+
+                            "</span>"+
+                          "</label>"+
+                        "</div>"+
+                  "</div>"+
+              "</div>"+
+            "</div>"+ 
+          "</div>";
+          content.innerHTML += add;
+        }
+        var s = document.getElementById("sub");
+        s.innerHTML = "<input onclick=\"pasar(["+arr+"])\" style='margin-left: 90%' class='btn btn-primary' type='submit' name='btncot' id='btnCot' value='Cotizar!!'></input>"
+  
+      });
+      
+}
   function SESSION(){
     //var db = firebase.database().ref("Estado");
         var db = firebase.database().ref("Usuarios");
@@ -239,7 +514,93 @@ function editar(root,id,n1=[0,0]){
         }*/
     });
   }
-  
+  function getvend(id){
+    var db = firebase.database().ref("Usuarios");
+    var db2 = firebase.database().ref("Vendedores");
+    var act = localStorage.getItem("Actual");
+    var set = document.getElementById(id);
+    console.log(act);
+    db.once("value", function(snap) {
+    var aux = snap.val();
+        if(aux[act].Tipo == "admin"){
+            console.log("admin");
+           set.value=act;
+        }else{
+            db2.once("value",function(snap2){
+                var aux2 = snap2.val();
+                for(var documento in aux2){
+                    console.log(documento);
+                    if(aux2[documento].Usuario == act){
+                       set.value= aux2[documento].Nombre;
+                    }
+                }
+            });
+        }
+    });
+
+  }
+  function combox(root,fields=[0,0],target,){
+    var db = firebase.database().ref(root);
+    var targ = document.getElementById(target);
+    var add="";
+    db.once("value", function(snap) {
+        var aux = snap.val();
+        for(var documento in aux){
+            var xy = aux[documento];
+            
+            add+="<option name='"+aux[documento].Nombre+"' style='color: #202940;' value='"+root.substring(0,1)+documento+"'>";
+            fields.forEach(function(i){
+                add+=xy[i]+" ";
+            });
+            add+="</option>";
+            
+            targ.innerHTML += add;
+            add="";
+        }
+
+    });    
+
+  }
+  function addcot(idc=0){
+    if(idc==0){
+        alert("debe seleccionar un producto/servicio");
+    }else{
+    var idn = document.getElementById(idc).value;
+    var n = idn.substring(0,1);
+    var id = idn.substring(1);
+    if(n=="P"){
+        if(parseInt(localStorage.getItem("n1"))>0){
+            var producto = JSON.parse(localStorage.getItem("pro"));
+        }else{
+            var producto = Array();
+            
+        }
+        
+        var nk1 = parseInt(localStorage.getItem("n1"))+1;
+        localStorage.setItem("n1",nk1);
+        producto.push(id);
+       
+        localStorage.setItem("pro",JSON.stringify(producto));
+        
+    }
+    else if(n=="S"){
+        if(parseInt(localStorage.getItem("n2"))>0){
+            var servicio = JSON.parse(localStorage.getItem("ser"));
+        }else{
+            var servicio = new Array();
+        }
+        
+        var nk2 = parseInt(localStorage.getItem("n2"))+1;
+        localStorage.setItem("n2",nk2);
+        servicio.push(id);
+        localStorage.setItem("ser",JSON.stringify(servicio));
+        console.log("SERVICIO");
+    }
+    location.reload(true);
+    }
+    
+
+  }
   function close(){
       console.log("cerrar sesion");
       var act = localStorage.getItem("Actual");
@@ -286,3 +647,28 @@ function editar(root,id,n1=[0,0]){
     });  
 
   }
+
+  function genPdf(div){
+
+    /*var pd = new jsPDF();
+    pd.fromHTML( $('#'+div).get(0), 20,20,{
+        'width':500});
+    pd.save('prueba.pdf');*/
+    var x = document.getElementById(div);
+    var v= document.getElementById("vend").value;
+    var c=document.getElementById("Client").value;
+    var f=document.getElementById("date").title;
+    x.style="width:fit-content;background-color: #202940;";
+    html2canvas(x, {
+        onrendered: function (canvas) {
+            var img = canvas.toDataURL("image/png");
+            var doc = new jsPDF();
+            doc.text(20,20,"Cliente: "+c);
+            doc.text(80,20,"Vendedor: "+v);
+            doc.text(180,20,f);
+            doc.addImage(img, 'JPEG',20,30);
+            doc.save('test.pdf');
+        }
+    });
+  
+}

@@ -12,6 +12,12 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script src="js/jquery-1.7.1.min.js"></script>
+  <script src="js/jspdf.min.js"></script>
+  <script src="js/html2canvas.js"></script>
+  <script src="js/acciones.js"></script>
+  
   
 </head>
 
@@ -153,32 +159,58 @@
                       <center>
                       <h4 class="card-title"></h4>
                     </center>
-                      <form>
+                      
                             <div class="row">
-                                    <div class="col">
-                                        <label for="inputBuscador">Buscar</label>
-                                      <input type="search" class="form-control" placeholder="Buscar" id="Buscador">
+                                    
+                                    <div class="col md-6">
+                                        <label for="Buscador">Buscar</label>
+                                        <input id="serpro" class="form-control" list="Buscador" name="Buscador">
+                                        <datalist class="form-control" style="background-color: #202940;" id="Buscador">
+
+                                        </datalist>
                                     </div>
+                                    <div style="width: 25%;">
+                                      <input onclick="JavaScript:addcot('serpro');" type="button" id="btnadd" value="AGREGAR"  class="btn btn-success">
+                                    </div>
+                                    <div style="width: 25%;">
+                                      <script type="text/javascript">
+                                      var dt = new Date();
+
+                                          // Display the month, day, and year. getMonth() returns a 0-based number.
+                                          var month = dt.getMonth()+1;
+                                          var day = dt.getDate();
+                                          var year = dt.getFullYear();
+                                          document.write( "<h2 title='"+day + '-' + month + '-' + year+"' id='date'>"+day + '-' + month + '-' + year+"</h2>");
+                                      </script>
+                                    </div>
+                                        
+                                        <script type="text/javascript">
+                                          combox("Producto",["Nombre","Marca"],"Buscador");
+                                          combox("Servicio",["Nombre","Duracion"],"Buscador");
+                                        </script>
+                                        <!--input type="search" class="form-control" placeholder="Buscar" id="Buscador"-->
+                                    
                                     
                                   </div>
                                   <br>
-                                  <div>
+                <div id="lol" style="background-color: #202940;"><div>
                                       <div class="row">
                                           <div class="col">
                                       <label for="inputClient">Cliente</label>
-                                      <select name="cliente"  class="form-control" placeholder="cliente" id="Client">
-                                        <!--opcion para cliente combobox-->
-                                        <option value="carlos    " class="form-control">Carlos</option>
-                                        <option value="Pedro     " class="form-control">Pedro</option>
+                                      <select name="cliente"  class="form-control" placeholder="cliente" id="Client">                                        
                                       </select>
+                                      <script type="text/javascript">
+                                        combox("Clientes",["Nombre","Telefono"],"Client");
+                                      </script>
                                     </div>
                                       <div class="col">
                                       <label for="inputVender">Vendedor</label>
-                                      <select name="Vende"  class="form-control" placeholder="Vende" id="Vende">
-                                        <!--opcion para vendedores combobox-->
-                                        <option value="carlos    " class="form-control">Carlos</option>
-                                        <option value="Pedro     " class="form-control">Pedro</option>
-                                      </select>
+                                      
+                                      <input type="text" disabled class="form-control" id="vend">
+                                      <script type="text/javascript">
+                                          getvend("vend");
+                                      </script>
+                                      
                                       <br></br>
                                     </div> 
                                 </div>
@@ -201,28 +233,48 @@
                                                           <th>Cantidad</th>
                                                           <th>Descripcion Producto o servicio</th>
                                                           <th>subTotal</th>
-                                                          <th>total</th> 
                                                         </tr>
-                                                      <tr>
+                                                      <!--tr>
                                                         <th>
                                                             <div class="form-group">
-                                                              <!--para que cree el campo donde ingresara la cantidad de producto y servicios-->
+                                                              <para que cree el campo donde ingresara la cantidad de producto y servicios>
                                                                 <input type="number" class="form-control" id="canti" name="canti" placeholder="1">
                                                             </div>
                                                         </th>
-                                                      </tr>
+                                                      </tr-->
                                                     </thead>
                                                     <tbody id="tablac">
-                                                         
+                                                        <script type="text/javascript">
+                                                        var x = localStorage.getItem("n1");
+                                                        var y = localStorage.getItem("n2");
+                                                        traspaso(parseInt(x),parseInt(y));  
+                                                        </script>
                                                     </tbody>
                                                 </table>
+                                                <script type="text/javascript">
+                                                var x = new Array();
+                                                if(parseInt(localStorage.getItem("n1"))>0){
+                                                    var producto = JSON.parse(localStorage.getItem("pro"));
+                                                    producto.forEach(function(i){
+                                                      x.push("P"+i);
+                                                    });
+                                                }
+                                                if(parseInt(localStorage.getItem("n2"))>0){
+                                                  var servicio = JSON.parse(localStorage.getItem("ser"));
+                                                  servicio.forEach(function(i){
+                                                      x.push("S"+i);
+                                                    });
+                                                }
+
+                                                document.write("<input type='hidden' id='datos' value='"+JSON.stringify(x)+"'");
+                                                </script>
                                             </div>
                                             <!-- /.panel-body -->
                                         </div>
-                            <button type="submit" class="btn btn-primary">Registrar</button>
-                          </form>
+                            
+                            <button type="button" onclick="JavaScript:cotizar('vend','Client','date','datos','Total');"  class="btn btn-primary">Registrar</button>
+                            <button type="button" onclick="JavaScript:genPdf('clientes');"  class="btn btn-danger">PDF</button>
                     </div>
                   </div>
-            </div>
-          </div>
+              
           
