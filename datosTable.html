@@ -266,14 +266,16 @@
                                                     });
                                                 }
 
-                                                document.write("<input type='hidden' id='datos' value='"+JSON.stringify(x)+"'");
+                                                document.write("<input type='hidden' id='datos' value='"+JSON.stringify(x)+"'>");
+                                                document.write("<input type='hidden' id='datos2' value=''>");
                                                 </script>
                                             </div>
                                             <!-- /.panel-body -->
                                         </div>
                             
                             <button type="button" onclick="JavaScript:cotizar('vend','Client','date','datos','Total');"  class="btn btn-primary">Registrar</button>
-                            <button type="button" onclick="JavaScript:genPdf('clientes');"  class="btn btn-danger">PDF</button>
+                            <button type="button" onclick="JavaScript:getname(document.getElementById('Client').value,'Clientes');"  class="btn btn-danger">PDF</button>
+                            
                     </div>
                   </div>
               
