@@ -498,7 +498,7 @@ function Catalogo(){
       });
       
 }
-  function SESSION(){
+  function SESSION(type=0){
     //var db = firebase.database().ref("Estado");
         var db = firebase.database().ref("Usuarios");
         var act = localStorage.getItem("Actual");
@@ -507,6 +507,8 @@ function Catalogo(){
         var aux = snap.val();
          //console.log(aux["Actual"]);
          if(aux[act].Estado == 0){
+            window.location="index.html";
+         }else if(aux[act].Tipo== "limitado" && type !=0){
             window.location="index.html";
          }
      /*   if(aux["Actual"]==0){
