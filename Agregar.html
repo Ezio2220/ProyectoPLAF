@@ -166,23 +166,48 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-6 col-sm-6">
-              <div class="card card-nav-tabs ">
-                <center>
-                  <h4 class="card-header card-header-info ">Vendedores</h4>
-                </center>
-                <div class="card-body">  
-                  <center>
-                    <p class="card-text">Agregar, modificar o eliminar vendedores.</p>
-                    <img src="assets/img/ve.png" >
-                  </center>
-                  <center>
-                    <a href="vend.html" class="btn btn-primary">Aceptar</a>
-                  </center>
-                </div>
-              </div>
-              <br></br>
-            </div>
+            
+            <script type="text/javascript" >
+              var comp = localStorage.getItem("Type");
+              if(comp=="admin"){
+                document.write("<div class='col-md-6 col-sm-6'>"+
+                    "<div class='card card-nav-tabs '>"+
+                      "<center>"+
+                        "<h4 class='card-header card-header-info '>Vendedores</h4>"+
+                      "</center>"+
+                      "<div class='card-body'>  "+
+                        "<center>"+
+                          "<p class='card-text'>Agregar, modificar o eliminar vendedores.</p>"+
+                          "<img src='assets/img/ve.png' >"+
+                        "</center>"+
+                        "<center>"+
+                          "<a href='vend.html' class='btn btn-primary'>Aceptar</a>"+
+                        "</center>"+
+                      "</div>"+
+                    "</div>"+
+                    "<br></br>"+
+                  "</div>");
+              }
+            </script>
+            
+            
+              
+                
+                  
+                
+                
+                  
+                    
+                    
+                  
+                  
+                    
+                  
+                
+              
+              
+          
+
             <div class="col-md-6 col-sm-6">
               <div class="card card-nav-tabs">
                 <center>
@@ -218,22 +243,30 @@
               </div>
               <br></br>
             </div>
-            <div class="col-md-6 col-sm-6">
-              <div class="card card-nav-tabs ">
-                <center>
-                  <h4 class="card-header card-header-info ">Usuario</h4>
-                </center>
-                <div class="card-body">      
-                  <center>
-                      <p class="card-text">Agregar nuevos Usuarios.</p>
-                      <img src="assets/img/user (2).png" >
-                  </center>
-                  <center>
-                    <a href="Usuario.html" class="btn btn-primary">Aceptar</a>
-                  </center>
-                </div>
-              </div>
-            </div>
+            <script type="text/javascript" >
+            var comp = localStorage.getItem("Type");
+            console.log(comp);
+            if(comp=="admin"){
+              document.write("<div class='col-md-6 col-sm-6'>"+
+              "<div class='card card-nav-tabs '>"+
+                "<center>"+
+                  "<h4 class='card-header card-header-info '>Usuario</h4>"+
+                "</center>"+
+                "<div class='card-body'>"+
+                  "<center>"+
+                      "<p class='card-text'>Agregar nuevos Usuarios.</p>"+
+                      "<img src='assets/img/user (2).png' >"+
+                  "</center>"+
+                  "<center>"+
+                    "<a href='Usuario.html' class='btn btn-primary'>Aceptar</a>"+
+                  "</center>"+
+                "</div>"+
+              "</div>"+
+            "</div>")
+            }
+            </script>
+            
+
           </div>
         </div>
       </div>
