@@ -18,7 +18,8 @@ var Actual;
   function nuevo(root,titulo,loc,sel=0){//****************************************************FUNCION PARA GUARDAR
     var data = firebase.database().ref(root);
     var obj = new Object();
-    
+    var objax = new Object();
+    var nomax;
     if(root!="Usuarios"){
     var n;var n1;
     
@@ -28,6 +29,25 @@ var Actual;
             obj[i.substring(0,i.length-1)]=document.getElementById(i).value;
          }else{
             obj[i]=document.getElementById(i).value;
+         }
+         if(root=="Vendedores"){
+            if(sel!=0){
+                if(i.substring(0,i.length-1)=="Usuario"){
+                    nomax=document.getElementById(i).value;
+                }
+                if(i.substring(0,i.length-1)=="Contraseña"){
+                    objax["Contraseña"]=document.getElementById(i).value;
+                }
+             }else{
+                if(i=="Usuario"){
+                    nomax=document.getElementById(i).value;
+                }
+                if(i=="Contraseña"){
+                    objax["Contraseña"]=document.getElementById(i).value;
+                }
+
+             }
+             objax["Tipo"]="limitado";
          }
         
     });
@@ -54,6 +74,10 @@ var Actual;
         }
          
         add.set(obj);
+        if(root=="Vendedores"){
+            var db1 = firebase.database().ref("Usuarios");
+            db1.child(nomax).set(objax);
+        }
         
     });       
     }else{
@@ -89,7 +113,7 @@ var Actual;
     }
 
 //****************************************************FUNCION PARA EDITAR
-function edt(root,titulo,loc,sel=0,title=[0,0]){//****************************************************FUNCION PARA GUARDAR
+function edt(root,titulo,loc,sel=0,title=[0,0]){
     var data = firebase.database().ref(root);
     var obj = new Object();
     console.log(titulo);
@@ -176,9 +200,12 @@ function editar(root,id,n1=[0,0]){
                     var x;
                     x= "<tr> <td>"+documento+" </td>"+
                           "<td>"+aux[documento].contraseña+" </td>"+
-                          "<td> "+
-                    "<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
-                    "<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
+                          "<td> ";
+                    var comp = localStorage.getItem("Type");
+                    if(comp=="admin"){
+                        x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
+                    }
+                x+="<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
                     +"</td> </tr>"; 
                     var acum = x.substring(0,x.length-4);
                     tot+=acum;
@@ -199,9 +226,12 @@ function editar(root,id,n1=[0,0]){
                     x+="<td>"+xy[i]+"</td>"
                     console.log(xy[i]);
                 });
-                
-                x+="<td><button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> "+
-                    "<button onclick="+"editar('"+root+"','edit"+i+"',["+n+"]);"+" id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
+                x+="<td>";
+                var comp = localStorage.getItem("Type");
+                    if(comp=="admin"){
+                        x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
+                    }
+                x+="<button onclick="+"editar('"+root+"','edit"+i+"',["+n+"]);"+" id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
                     "</td> </tr>";
                 var acum = x.substring(0,x.length-5);
                 tot+=acum;
@@ -509,7 +539,7 @@ function Catalogo(){
          if(aux[act].Estado == 0){
             window.location="index.html";
          }else if(aux[act].Tipo== "limitado" && type !=0){
-            window.location="index.html";
+            window.location="Principal.html";
          }
      /*   if(aux["Actual"]==0){
             window.location="index.html";
@@ -633,6 +663,7 @@ function Catalogo(){
                     data.child(name).child("Estado").set(1);
                     this.Actual = name;
                     localStorage.setItem("Actual",name);
+                    localStorage.setItem("Type",aux[documento].Tipo);
                     //db.child("Actual").set(1);
                     //db.child("user").set(name);
                     window.location="Principal.html";
