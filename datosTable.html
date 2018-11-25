@@ -17,7 +17,9 @@
   <script src="js/jspdf.min.js"></script>
   <script src="js/html2canvas.js"></script>
   <script src="js/acciones.js"></script>
-  
+  <script type="text/javascript">
+    SESSION();
+ </script>
   
 </head>
 
@@ -144,7 +146,7 @@
                 </a>
               </li>
               <li class="button-container">
-                <a href="" target="_blank" class="btn btn-primary btn-block" id="Salir">
+                <a href="javaScript:close();" target="_blank" class="btn btn-primary btn-block" id="Salir">
                   Salir
                 </a>
               </li>
@@ -271,14 +273,16 @@
                                                     });
                                                 }
 
-                                                document.write("<input type='hidden' id='datos' value='"+JSON.stringify(x)+"'");
+                                                document.write("<input type='hidden' id='datos' value='"+JSON.stringify(x)+"'>");
+                                                document.write("<input type='hidden' id='datos2' value=''>");
                                                 </script>
                                             </div>
                                             <!-- /.panel-body -->
                                         </div>
                             
                             <button type="button" onclick="JavaScript:cotizar('vend','Client','date','datos','Total');"  class="btn btn-primary">Registrar</button>
-                            <button type="button" onclick="JavaScript:genPdf('clientes');"  class="btn btn-danger">PDF</button>
+                            <button type="button" onclick="JavaScript:getname(document.getElementById('Client').value,'Clientes');"  class="btn btn-danger">PDF</button>
+                            
                     </div>
                   </div>
               

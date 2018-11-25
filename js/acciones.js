@@ -331,7 +331,7 @@ function traspaso(n1,n2){
                 });
             }
             if(true){
-                add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='number' name='total'  id='Total' ></td></tr>";
+                add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='text' name='total'  id='Total' ></td></tr>";
                 table.innerHTML+=add;
                 sum=0;
             }
@@ -359,7 +359,7 @@ function traspaso(n1,n2){
                 });
             }
             if(n2==0){
-            add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='number' name='total'  id='Total' ></td></tr>";
+            add="<tr><td></td> <td>TOTAL:</td><td><input class='form-control' disabled Value='"+sum+"' type='text' name='total'  id='Total' ></td></tr>";
             //add+="<input class='form-control' disabled Value='"+sum2+"' type='number' name='productos'  id='Total' >";
             table.innerHTML+=add;
             sum=0;
@@ -648,26 +648,48 @@ function Catalogo(){
 
   }
 
+  function getname(nam,root){
+      console.log("LOL");
+    var db = firebase.database().ref(root);
+    console.log(nam.substring(1));
+    db.once("value", function(snap) {
+        var aux = snap.val();
+        for(var documento in aux){
+            console.log(documento);
+            if(documento==nam.substring(1)){
+                console.log(aux[documento].Nombre);
+                document.getElementById("datos2").value = aux[documento].Nombre;
+                genPdf('clientes');
+            }
+        }
+    });  
+  }
   function genPdf(div){
-
+    
     /*var pd = new jsPDF();
     pd.fromHTML( $('#'+div).get(0), 20,20,{
         'width':500});
     pd.save('prueba.pdf');*/
     var x = document.getElementById(div);
     var v= document.getElementById("vend").value;
-    var c=document.getElementById("Client").value;
+    
+    var c =document.getElementById("datos2").value;
     var f=document.getElementById("date").title;
     x.style="width:fit-content;background-color: #202940;";
+    var t = document.getElementById("Total");
+    t.value = "$"+t.value;
     html2canvas(x, {
         onrendered: function (canvas) {
             var img = canvas.toDataURL("image/png");
             var doc = new jsPDF();
+            doc.setFontSize(15)
             doc.text(20,20,"Cliente: "+c);
             doc.text(80,20,"Vendedor: "+v);
             doc.text(180,20,f);
             doc.addImage(img, 'JPEG',20,30);
-            doc.save('test.pdf');
+            doc.save('cotizacion.pdf');
+            x.style="";
+            t.value=t.value.substring(1);
         }
     });
   
