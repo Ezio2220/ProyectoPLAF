@@ -320,10 +320,10 @@ function traspaso(n1,n2){
                     console.log(acum);
                     if(documento==i){
                         sum+=parseFloat(aux[documento].Precio);
-                        add+="<tr><td><input min='1' onchange=\"subtotal('cant"+acum+"','sub"+acum+"')\" type='number' class='form-control' id='cant"+acum+"' name='canti' value='1'> </td>"+
+                        add+="<tr><td><input style='background-color: #202940;' min='1' onchange=\"subtotal('cant"+acum+"','sub"+acum+"')\" type='number' class='form-control' id='cant"+acum+"' name='canti' value='1'> </td>"+
                         "<td id='S"+documento+"'>";
                         add+= aux[documento].Nombre + " : "+aux[documento].Descripcion+" (duracion: "+aux[documento].Duracion+" dias)</td>"+
-                        "<td> <input class='form-control' disabled Value='"+aux[documento].Precio+"' type='number' name='"+aux[documento].Precio+"'  id='sub"+acum+"' > </td></tr>";
+                        "<td> <input style='background-color: #202940;' class='form-control' disabled Value='"+aux[documento].Precio+"' type='number' name='"+aux[documento].Precio+"'  id='sub"+acum+"' > </td></tr>";
                         table.innerHTML += add;
                         console.log(add);
                         add="";
@@ -548,7 +548,7 @@ function Catalogo(){
         for(var documento in aux){
             var xy = aux[documento];
             
-            add+="<option name='"+root.substring(0,1)+"' style='color: #202940;' value='"+root.substring(0,1)+documento+"'>";
+            add+="<option name='"+aux[documento].Nombre+"' style='color: #202940;' value='"+root.substring(0,1)+documento+"'>";
             fields.forEach(function(i){
                 add+=xy[i]+" ";
             });
@@ -650,8 +650,25 @@ function Catalogo(){
 
   function genPdf(div){
 
-    var pd = new jsPDF();
+    /*var pd = new jsPDF();
     pd.fromHTML( $('#'+div).get(0), 20,20,{
         'width':500});
-    pd.save('prueba.pdf');
-  }
+    pd.save('prueba.pdf');*/
+    var x = document.getElementById(div);
+    var v= document.getElementById("vend").value;
+    var c=document.getElementById("Client").value;
+    var f=document.getElementById("date").title;
+    x.style="width:fit-content;background-color: #202940;";
+    html2canvas(x, {
+        onrendered: function (canvas) {
+            var img = canvas.toDataURL("image/png");
+            var doc = new jsPDF();
+            doc.text(20,20,"Cliente: "+c);
+            doc.text(80,20,"Vendedor: "+v);
+            doc.text(180,20,f);
+            doc.addImage(img, 'JPEG',20,30);
+            doc.save('test.pdf');
+        }
+    });
+  
+}
