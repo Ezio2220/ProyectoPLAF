@@ -178,64 +178,65 @@
                         </div>
                     </div>
                   <!-- /.panel-body -->
-                  </div>
-                </div>
-                <!-- /.col-lg-8 -->
+                  <!-- /.col-lg-8 -->
                 <div class="col-lg-3">
-                  <div class="panel panel-default">
-                    <div class="card card-nav-tabs">
-                      <div class="card-header card-header-warning">
-                        <div class="panel-heading panel-heading-primary">
-                            <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar vendedor
-                        </div>  
+                    <div class="panel panel-default">
+                      <div style="margin-left: 40%;" class="card card-nav-tabs">
+                        <div class="card-header card-header-warning">
+                          <div class="panel-heading panel-heading-primary">
+                              <i class="fa fa-user-plus fa-fw"></i> Agregar u Actualizar vendedor
+                          </div>  
+                        </div>
+                        <br></br>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                          <form id="formDatospro" class="" action="JavaScript:nuevo('Vendedores',['Nombre','Direccion','Telefono','DUI','Nit','Usuario','Contraseña'],'vend');" method="">
+                            <div class="formImputs">
+                              <div class="form-group">
+                                <label for="">Nombre:</label>
+                                <input type="text" class="form-control" id="Nombre" name="nomv" placeholder="Luis cordova">
+                              </div>
+                              <div class="form-group">
+                                <label for="">Direccion</label>
+                                <input type="text" class="form-control" id="Direccion" name="dirV" placeholder="10 Urbes, san miuel">
+                              </div>
+                              <div class="form-group">
+                                <label for="">Telefono</label>
+                                <input type="number" class="form-control" id="Telefono" name="tev" placeholder="1234-1233">
+                              </div>
+                              <div class="form-group">
+                                <label for="">Dui:</label>
+                                <input type="text" class="form-control" id="DUI" name="duiv" placeholder="12345-0">
+                              </div>
+                              <div class="form-group">
+                                <label for="">Nit:</label>
+                                <input type="text" class="form-control" id="Nit" name="nitv" placeholder="12233-0">
+                              </div>
+                              <div class="form-group">
+                                <label for="">usuario:</label>
+                                <input type="text" class="form-control" id="Usuario" name="usuav" placeholder="nickname">
+                              </div>
+                              <div class="form-group">
+                                <label for="">Contraseña:</label>
+                                <input type="text" class="form-control" id="Contraseña" name="conv" placeholder="******">
+                              </div>
+                            </div>
+                            <div class="formButtons">
+                              <center>
+                                <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddV" value="Agregar vendedor"></input>
+                                <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
+                              </center>
+                            </div>
+                          </form>
+                        </div>
+                      <!-- /.panel-body -->
                       </div>
-                      <br></br>
-                      <!-- /.panel-heading -->
-                      <div class="panel-body">
-                        <form id="formDatospro" class="" action="JavaScript:nuevo('Vendedores',['Nombre','Direccion','Telefono','DUI','Nit','Usuario','Contraseña'],'vend');" method="">
-                          <div class="formImputs">
-                            <div class="form-group">
-                              <label for="">Nombre:</label>
-                              <input type="text" class="form-control" id="Nombre" name="nomv" placeholder="Luis cordova">
-                            </div>
-                            <div class="form-group">
-                              <label for="">Direccion</label>
-                              <input type="text" class="form-control" id="Direccion" name="dirV" placeholder="10 Urbes, san miuel">
-                            </div>
-                            <div class="form-group">
-                              <label for="">Telefono</label>
-                              <input type="number" class="form-control" id="Telefono" name="tev" placeholder="1234-1233">
-                            </div>
-                            <div class="form-group">
-                              <label for="">Dui:</label>
-                              <input type="text" class="form-control" id="DUI" name="duiv" placeholder="12345-0">
-                            </div>
-                            <div class="form-group">
-                              <label for="">Nit:</label>
-                              <input type="text" class="form-control" id="Nit" name="nitv" placeholder="12233-0">
-                            </div>
-                            <div class="form-group">
-                              <label for="">usuario:</label>
-                              <input type="text" class="form-control" id="Usuario" name="usuav" placeholder="nickname">
-                            </div>
-                            <div class="form-group">
-                              <label for="">Contraseña:</label>
-                              <input type="text" class="form-control" id="Contraseña" name="conv" placeholder="******">
-                            </div>
-                          </div>
-                          <div class="formButtons">
-                            <center>
-                              <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddV" value="Agregar vendedor"></input>
-                              <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
-                            </center>
-                          </div>
-                        </form>
-                      </div>
-                    <!-- /.panel-body -->
                     </div>
+                  <!-- /.col-lg-4 -->
                   </div>
-                <!-- /.col-lg-4 -->
+                  </div>
                 </div>
+                
               </div>
             </div>
           </div>
