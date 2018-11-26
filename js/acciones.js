@@ -872,12 +872,18 @@ function genPdf2All(div,f){
     for(var i=0;i<y.length;i++){
         y[i].style.display = "none";
     }
+    var dt = new Date();
+    var month = dt.getMonth()+1;
+    var day = dt.getDate();
+    var year = dt.getFullYear();
+    var fecha = day + '-' + month + '-' + year;
     html2canvas(x, {
         onrendered: function (canvas) {
             var img = canvas.toDataURL("image/png");
             var doc = new jsPDF();
             doc.setFontSize(20)
             doc.text(50,20,"Reporte de "+f);
+            doc.text(150,20,fecha);
             doc.addImage(img, 'JPEG',20,30);
             doc.save('tabla.pdf');
             x.style="";
