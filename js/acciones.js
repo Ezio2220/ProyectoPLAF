@@ -265,10 +265,14 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
               "</button>"+
             "</div> <form id = 'formedt' action=\"JavaScript:nuevo('"+root+"',["+y+"],'"+root+"','"+item+"');\">"+
             "<div class='modal-body'><div class='formImputs'>";
-
+            
+            var a = new Array();
             n1.forEach(function(i){
+               var elemento = i; 
+               
+               a.push(elemento.id);
                modal += "<div class='form-group'><label>"+i.id.substring(0,i.id.length-1)+"</label>";
-               modal += i.outerHTML;
+               modal += elemento.outerHTML;
                 console.log(i.outerHTML);
                 modal +="</div>";
                 i.id = i.id.substring(0,i.id.length-1);
@@ -284,6 +288,11 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
       "</div>";
       var options ;
       x.innerHTML = modal;
+        var contador = 0;
+        n2.forEach(function(i){
+            document.getElementById(a[contador]).value=i;
+            contador=contador+1;
+        });
         console.log(modal);
         console.log(code);
       $("#"+code).modal(options);
@@ -310,6 +319,9 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
                         color = " class='text-primary' ";
                     }
                     var x;
+                    var arx = new Array();
+                    arx.push(documento);
+                    arx.push(aux[documento].contraseña);
                     x= "<tr> <td "+color+">"+documento+" </td>"+
                           "<td "+color+">"+aux[documento].contraseña+" </td>"+
                           "<td "+color+"> ";
@@ -319,7 +331,7 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
                         if(comp=="admin"){
                             x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
                         }
-                        x+="<button onclick="+"editar('"+root+"','edit"+i+"',[Nombre,contraseña]);"+" id='edit"+i+"' id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
+                        x+="<button onclick="+"editar('"+root+"','edit"+i+"',[Nombre,contraseña],"+JSON.stringify(arx)+");"+" id='edit"+i+"' id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
                         +"</td> </tr>";
                         var acum = x.substring(0,x.length-4);
                     }else{
@@ -343,9 +355,12 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
                 var arx = new Array();
                 x= "<tr>";
                 n.forEach(function(i){
-                    arx.push(xy[i]);
+                    
+                    
                     x+="<td>"+xy[i]+"</td>"
                     console.log(xy[i]);
+                    arx.push(xy[i].replace(" ", "&nbsp;"));
+                    
                 });
                 x+="<td>";
                 var comp = localStorage.getItem("Type");
