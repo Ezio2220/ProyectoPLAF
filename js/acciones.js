@@ -636,13 +636,13 @@ function Catalogo(){
                   "</ol>"+
                   "<div class='carousel-inner'>"+
                     "<div class='carousel-item active'>"+
-                      "<img class='d-block w-10' src='img/pro1.jpg' alt='First slide'>"+
+                      "<img class='d-block w-10' src='img/te11.jpg' alt='First slide'>"+
                     "</div>"+
                     "<div class='carousel-item'>"+
-                      "<img class='d-block w-100' src='img/pro1b.jpg' alt='Second slide'>"+
+                      "<img class='d-block w-100' src='img/te2.jpg' alt='Second slide'>"+
                     "</div>"+
                     "<div class='carousel-item'>"+
-                      "<img class='d-block w-100' src='img/pro1c.jpg' alt='Third slide'>"+
+                      "<img class='d-block w-100' src='img/te3.jpg' alt='Third slide'>"+
                     "</div>"+
                   "</div>"+
                   "<a class='carousel-control-prev' href='#P"+documento+"' role='button' data-slide='prev'>"+
