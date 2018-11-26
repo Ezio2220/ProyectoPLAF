@@ -362,7 +362,7 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
                     arx.push(xy[i].replace(" ", "&nbsp;"));
                     
                 });
-                x+="<td>";
+                x+="<td class='no' >";
                 var comp = localStorage.getItem("Type");
                     if(comp=="admin"){
                         x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
@@ -860,6 +860,30 @@ function Catalogo(){
             doc.save('cotizacion.pdf');
             x.style="";
             t.value=t.value.substring(1);
+        }
+    });
+  
+}
+
+function genPdf2All(div,f){
+    var x = document.getElementById(div);
+    x.style="width:fit-content;background-color: #202940;";
+    var y = document.getElementsByClassName("no");
+    for(var i=0;i<y.length;i++){
+        y[i].style.display = "none";
+    }
+    html2canvas(x, {
+        onrendered: function (canvas) {
+            var img = canvas.toDataURL("image/png");
+            var doc = new jsPDF();
+            doc.setFontSize(20)
+            doc.text(50,20,"Reporte de "+f);
+            doc.addImage(img, 'JPEG',20,30);
+            doc.save('tabla.pdf');
+            x.style="";
+            for(var i=0;i<y.length;i++){
+                y[i].style= "";
+            }
         }
     });
   
