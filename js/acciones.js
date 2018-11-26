@@ -34,6 +34,7 @@ var Actual;
             if(sel!=0){
                 if(i.substring(0,i.length-1)=="Usuario"){
                     nomax=document.getElementById(i).value;
+                    
                 }
                 if(i.substring(0,i.length-1)=="Contraseña"){
                     objax["Contraseña"]=document.getElementById(i).value;
@@ -41,18 +42,22 @@ var Actual;
              }else{
                 if(i=="Usuario"){
                     nomax=document.getElementById(i).value;
+                    
+                    
                 }
                 if(i=="Contraseña"){
-                    objax["Contraseña"]=document.getElementById(i).value;
+                    objax["contraseña"]=document.getElementById(i).value;
                 }
 
              }
+             
              objax["Tipo"]="limitado";
          }
         
     });
     
     data.once("value", function(snap) {
+            
         var aux = snap.val();
         for(var documento in aux){
             //print(datosArray[documento].Nombre);
@@ -73,33 +78,66 @@ var Actual;
             add = data.child(id);
         }
          
-        add.set(obj);
+        
         if(root=="Vendedores"){
-            var db1 = firebase.database().ref("Usuarios");
-            db1.child(nomax).set(objax);
+            
+                var dot = firebase.database().ref("Usuarios");
+                    dot.once("value", function(snap2) {
+                        var j = true;
+                        var aux2 = snap2.val();
+                        for(var documento2 in aux2){
+                            console.log("1");
+                            if(documento2 == nomax){
+                                alert("ESE USUARIO YA EXISTE!");
+                                j= false;
+                                location.reload(true);
+                            }
+                        }
+                        if(j){
+                            console.log("2");
+                        add.set(obj);
+                        dot.child(nomax).set(objax);
+                        (sel==0) ? (alert("GUARDADO!"),location.reload(true)) : (alert("Actualizado"),location.reload(true)) ;
+                        }
+                        
+                    });
+            
+            
+        }else{
+            add.set(obj);
+            (sel==0) ? (alert("GUARDADO!"),location.reload(true)) : (alert("Actualizado"),location.reload(true)) ;
         }
         
     });       
     }else{
         obj["Tipo"]="admin";
         if(sel==0){
-            obj["contraseña"]=document.getElementById("contraseña").value;
-            data.child(document.getElementById("Nombre").value).set(obj);
+            var norep = document.getElementById("Nombre").value;
+
         }else{
-            data.child(sel).remove();
-            obj["contraseña"]=document.getElementById("contraseña1").value;
-            data.child(document.getElementById("Nombre1").value).set(obj);
+            var norep = document.getElementById("Nombre1").value;
         }
-        
+        data.once("value", function(snap) {
+            var aux = snap.val();
+            for(var documento in aux){
+                if(documento == norep){
+                    alert("ESE USUARIO YA EXISTE!");
+                    location.reload(true);
+                }
+            }
+            if(sel==0){
+                obj["contraseña"]=document.getElementById("contraseña").value;
+                data.child(norep).value.set(obj);
+            }else{
+                data.child(sel).remove();
+                obj["contraseña"]=document.getElementById("contraseña1").value;
+                data.child(norep).value.set(obj);
+            }
+            (sel==0) ? (alert("GUARDADO!"),location.reload(true)) : (alert("Actualizado"),location.reload(true)) ;
+        });       
        
     }
-    if(sel==0){
-         alert("GUARDADO!");
-    }else{
-        alert("Actualizado");
-    }
-   
-    location.reload(true);
+    
     //window.location=loc+".html";
   }
   ////****************************************************FUNCION PARA ELIMINAR
@@ -109,9 +147,47 @@ var Actual;
       var data = firebase.database().ref(root);
       var item = document.getElementById(id).value;
      // console.log(item);
-      data.child(item).remove();
-    alert("borrado");
-    location.reload(true);
+     if(root=="Vendedores"){
+        data.once("value", function(snap) {
+            var aux = snap.val();
+            var item2 = aux[item].Usuario;
+            var dot = firebase.database().ref("Usuarios");
+            dot.child(item2).remove();
+            data.child(item).remove();
+            alert("borrado");
+            location.reload(true);
+        });
+
+     }else if(root=="Usuarios"){
+        data.once("value",function(snap1){
+            var aux1 = snap1.val();
+            if(aux1[item].Tipo=="limitado"){
+                var dot = firebase.database().ref("Vendedores");
+                dot.once("value",function(snap2){
+                    var aux2 = snap2.val();
+                    for(var doc in aux2){
+                        if(aux2[doc].Usuario==item){
+                            
+                            dot.child(doc).remove();
+                            data.child(item).remove();
+                            alert("borrado");
+                            location.reload(true);
+                        }
+                    }
+                });
+
+            }else{
+                data.child(item).remove();
+                alert("borrado");
+                location.reload(true);
+            }
+        });
+     }else{
+        data.child(item).remove();
+        alert("borrado");
+        location.reload(true);
+     }
+      
     }
 
 
