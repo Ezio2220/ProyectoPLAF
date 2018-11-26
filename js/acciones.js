@@ -110,13 +110,14 @@ var Actual;
         
     });       
     }else{
-        obj["Tipo"]="admin";
+        
         if(sel==0){
             var norep = document.getElementById("Nombre").value;
 
         }else{
             var norep = document.getElementById("Nombre1").value;
         }
+        
         data.once("value", function(snap) {
             var aux = snap.val();
             for(var documento in aux){
@@ -126,12 +127,32 @@ var Actual;
                 }
             }
             if(sel==0){
+                obj["Tipo"]="admin";
                 obj["contraseña"]=document.getElementById("contraseña").value;
-                data.child(norep).value.set(obj);
+                data.child(norep).set(obj);
             }else{
-                data.child(sel).remove();
-                obj["contraseña"]=document.getElementById("contraseña1").value;
-                data.child(norep).value.set(obj);
+                if(aux[sel].Tipo=="limitado"){
+                    obj["Tipo"]="limitado";
+                    obj["contraseña"]=document.getElementById("contraseña1").value;
+                    var dot = firebase.database().ref("Vendedores");
+                    dot.once("value",function(snap2){
+                        var aux2 = snap2.val();
+                        for(var doc in aux2){
+                            if(aux2[doc].Usuario==sel){
+                                dot.child(doc).child("Usuario").set(norep);
+                                dot.child(doc).child("Contraseña").set(obj["contraseña"]);
+                                data.child(sel).remove();
+                                data.child(norep).set(obj);
+                            }
+                        }
+                    });
+                }else{
+                    obj["Tipo"]="admin";
+                    data.child(sel).remove();
+                    obj["contraseña"]=document.getElementById("contraseña1").value;
+                    data.child(norep).set(obj);
+                }
+                
             }
             (sel==0) ? (alert("GUARDADO!"),location.reload(true)) : (alert("Actualizado"),location.reload(true)) ;
         });       
@@ -214,7 +235,7 @@ function edt(root,titulo,loc,sel=0,title=[0,0]){
     location.reload(true);
     //window.location=loc+".html";
   }
-function editar(root,id,n1=[0,0]){
+function editar(root,id,n1=[0,0],n2=[0,0]){
         var item = document.getElementById(id).value;
         console.log(item);
         console.log(n1);
@@ -284,17 +305,28 @@ function editar(root,id,n1=[0,0]){
                 for(var documento in aux){
                     var xy = aux[documento]
                    // console.log("a");
-                    var x;
-                    x= "<tr> <td>"+documento+" </td>"+
-                          "<td>"+aux[documento].contraseña+" </td>"+
-                          "<td> ";
-                    var comp = localStorage.getItem("Type");
-                    if(comp=="admin"){
-                        x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
+                    var color = "";
+                    if(aux[documento].Tipo=="limitado"){
+                        color = " class='text-primary' ";
                     }
-                x+="<button onclick="+"editar('"+root+"','edit"+i+"',[Nombre,contraseña]);"+" id='edit"+i+"' id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
-                    +"</td> </tr>"; 
-                    var acum = x.substring(0,x.length-4);
+                    var x;
+                    x= "<tr> <td "+color+">"+documento+" </td>"+
+                          "<td "+color+">"+aux[documento].contraseña+" </td>"+
+                          "<td "+color+"> ";
+                    if(localStorage.getItem("Actual")!=documento){
+
+                        var comp = localStorage.getItem("Type");
+                        if(comp=="admin"){
+                            x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
+                        }
+                        x+="<button onclick="+"editar('"+root+"','edit"+i+"',[Nombre,contraseña]);"+" id='edit"+i+"' id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
+                        +"</td> </tr>";
+                        var acum = x.substring(0,x.length-4);
+                    }else{
+                        x+="USUARIO ACTUAL</td></tr>";
+                        var acum = x.substring(0,x.length-5);
+                    } 
+                    
                     tot+=acum;
                     //console.log(tot);
                     i=i+1;
@@ -308,8 +340,10 @@ function editar(root,id,n1=[0,0]){
             for(var documento in aux){
                 var xy = aux[documento]
                 var x;
+                var arx = new Array();
                 x= "<tr>";
                 n.forEach(function(i){
+                    arx.push(xy[i]);
                     x+="<td>"+xy[i]+"</td>"
                     console.log(xy[i]);
                 });
@@ -318,7 +352,7 @@ function editar(root,id,n1=[0,0]){
                     if(comp=="admin"){
                         x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
                     }
-                x+="<button onclick="+"editar('"+root+"','edit"+i+"',["+n+"]);"+" id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
+                x+="<button onclick="+"editar('"+root+"','edit"+i+"',["+n+"],"+JSON.stringify(arx)+");"+" id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
                     "</td> </tr>";
                 var acum = x.substring(0,x.length-5);
                 tot+=acum;
