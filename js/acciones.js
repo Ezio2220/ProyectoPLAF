@@ -81,9 +81,17 @@ var Actual;
         
     });       
     }else{
-        obj["contraseña"]=document.getElementById("contraseña").value;
         obj["Tipo"]="admin";
-        data.child(document.getElementById("Nombre").value).set(obj);
+        if(sel==0){
+            obj["contraseña"]=document.getElementById("contraseña").value;
+            data.child(document.getElementById("Nombre").value).set(obj);
+        }else{
+            data.child(sel).remove();
+            obj["contraseña"]=document.getElementById("contraseña1").value;
+            data.child(document.getElementById("Nombre1").value).set(obj);
+        }
+        
+       
     }
     if(sel==0){
          alert("GUARDADO!");
@@ -136,13 +144,16 @@ function editar(root,id,n1=[0,0]){
         console.log(n1);
         var comp;
         var y = Array();
-
+        
+        //if(root != "Usuarios"){
         n1.forEach(function(i){
             i.id = i.id+"1";
             y.push("\'"+i.id+"\'");
             comp = i;
         });
+        //}
         console.log(comp);
+        console.log(comp.length);
        // console.log(comp.length);
         if(comp.length == undefined){
         var x = document.getElementById("foredit");
@@ -205,7 +216,7 @@ function editar(root,id,n1=[0,0]){
                     if(comp=="admin"){
                         x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
                     }
-                x+="<button id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
+                x+="<button onclick="+"editar('"+root+"','edit"+i+"',[Nombre,contraseña]);"+" id='edit"+i+"' id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button> "+
                     +"</td> </tr>"; 
                     var acum = x.substring(0,x.length-4);
                     tot+=acum;
