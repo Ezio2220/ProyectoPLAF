@@ -703,6 +703,7 @@ function Catalogo(){
             if(documento==nam.substring(1)){
                 console.log(aux[documento].Nombre);
                 document.getElementById("datos2").value = aux[documento].Nombre;
+                localStorage.removeItem("pro");localStorage.removeItem("ser");
                 genPdf('clientes');
             }
         }
