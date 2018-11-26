@@ -324,7 +324,7 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
                     arx.push(aux[documento].contraseña);
                     x= "<tr> <td "+color+">"+documento+" </td>"+
                           "<td "+color+">"+aux[documento].contraseña+" </td>"+
-                          "<td "+color+"> ";
+                          "<td class='no' "+color+"> ";
                     if(localStorage.getItem("Actual")!=documento){
 
                         var comp = localStorage.getItem("Type");
