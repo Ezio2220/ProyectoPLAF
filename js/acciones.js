@@ -13,7 +13,8 @@ var Actual;
   };
   firebase.initializeApp(config);
   var db = firebase.database();
-
+//#####################################################################################################################################################################
+  //--------------------------------------------------AGREGAR REGISTROS!!!!---------------------------------------------------------------------------------
   //root toma el nombre de la tabla donde se escribira y titulo toma un array de los campos que esta tenga
   function nuevo(root,titulo,loc,sel=0){//****************************************************FUNCION PARA GUARDAR
     var data = firebase.database().ref(root);
@@ -161,7 +162,8 @@ var Actual;
     
     //window.location=loc+".html";
   }
-  ////****************************************************FUNCION PARA ELIMINAR
+  //#####################################################################################################################################################################
+  ////****************************************************FUNCION PARA ELIMINAR----------------------------------------------------------------------------------------
   function borrar(root,id){
      // console.log(root);
      // console.log(id);
@@ -216,8 +218,8 @@ var Actual;
         var x = document.getElementById("foredit");
         x.innerHTML = "";
     }
-
-//****************************************************FUNCION PARA EDITAR
+//#####################################################################################################################################################################
+//****************************************************FUNCION AUXILIAR PARA EDITAR---------------------------------------------------------------------------------------------
 function edt(root,titulo,loc,sel=0,title=[0,0]){
     var data = firebase.database().ref(root);
     var obj = new Object();
@@ -235,6 +237,8 @@ function edt(root,titulo,loc,sel=0,title=[0,0]){
     location.reload(true);
     //window.location=loc+".html";
   }
+//#####################################################################################################################################################################
+//---------------------------------------------------------------FUNCION EDITAR (CREADOR DE MODAL)
 function editar(root,id,n1=[0,0],n2=[0,0]){
         var item = document.getElementById(id).value;
         console.log(item);
@@ -300,7 +304,8 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
         
         //alert("modificado"); 
     }
-//**************************************************** FUNCION PARA MOSTRAR EN TABLA!!!!
+//#####################################################################################################################################################################
+//**************************************************** FUNCION PARA MOSTRAR EN TABLA!!!!---------------------------------------------------------------------
   function mostrar(root,table,n=[0,0]){
       var data = firebase.database().ref(root);
       var tbl = document.getElementById(table);
@@ -378,6 +383,8 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
         }); 
       }  
   }
+//#####################################################################################################################################################################
+//------------------------------------------AUXLIAR PARA CATALOGO------------------------------------------
 function pasar(arr){
    // alert(arr);
     var objp = new Array();
@@ -417,6 +424,8 @@ function pasar(arr){
     window.location="datosTable.html";
     //localStorage.setItem("Cot",obj);
 }
+//#####################################################################################################################################################################
+//--------------------------------------FUNCION PARA CALCULAR TOTALES Y SUBTOTALES EN TABLA DE COTIZACIONES
 function subtotal(from,to){
     var o1 = document.getElementById(from).value;
     var sub = document.getElementById(to);
@@ -433,6 +442,8 @@ function subtotal(from,to){
     tot.value = parseFloat(total);
     //console.log( o*op);
 }
+//#####################################################################################################################################################################
+//--------------------------------------FUNCION QUE GUARDA EN BD COTIZACIONES(NO UTILIZADO)
 function cotizar(v,c,f,p,t){
     var data = firebase.database().ref("Cotizaciones");
     var vendedor = document.getElementById(v).value;
@@ -469,6 +480,8 @@ function cotizar(v,c,f,p,t){
     
 
 }
+//#####################################################################################################################################################################
+//------------------------------FUNCION AUXLIAR BUSCAR EN COTIZACIONES
 function traspaso(n1,n2){
     var p = firebase.database().ref("Producto");
     var s = firebase.database().ref("Servicio");
@@ -539,6 +552,8 @@ function traspaso(n1,n2){
     }
     
 }
+//#####################################################################################################################################################################
+//------------------------------------FUNCION QUE CARGA EL CATALOGO
 function Catalogo(){
       var data = firebase.database();
       var pro = data.ref("Producto");
@@ -664,6 +679,8 @@ function Catalogo(){
       });
       
 }
+//#####################################################################################################################################################################
+//--------------------------------FUNCION QUE CONTROLA LAS SESIONES Y LIMITACIONES DE USUARIO ESTANDAR
   function SESSION(type=0){
     //var db = firebase.database().ref("Estado");
         var db = firebase.database().ref("Usuarios");
@@ -682,6 +699,8 @@ function Catalogo(){
         }*/
     });
   }
+//#####################################################################################################################################################################
+//-------------------------------------------MOSTRAR EL USUARIO ACTUAL
   function getvend(id){
     var db = firebase.database().ref("Usuarios");
     var db2 = firebase.database().ref("Vendedores");
@@ -707,6 +726,8 @@ function Catalogo(){
     });
 
   }
+  //#####################################################################################################################################################################
+  //------------------------------CARGAR DATOS EN BOTON BUSCAR de cotizaciones
   function combox(root,fields=[0,0],target,){
     var db = firebase.database().ref(root);
     var targ = document.getElementById(target);
@@ -729,6 +750,8 @@ function Catalogo(){
     });    
 
   }
+  //#####################################################################################################################################################################
+  //----------------------------ACTUALIZAR TABLA AL BUSCAR EN COTIZACIONES
   function addcot(idc=0){
     if(idc==0){
         alert("debe seleccionar un producto/servicio");
@@ -769,6 +792,8 @@ function Catalogo(){
     
 
   }
+  //#####################################################################################################################################################################
+  //-------------------------------------------------CERRAR SESION
   function close(){
       console.log("cerrar sesion");
       var act = localStorage.getItem("Actual");
@@ -780,7 +805,8 @@ function Catalogo(){
       alert("Cerrando sesion..");
       window.location="index.html";
   }
-
+//#####################################################################################################################################################################
+//----------------------------------------------LOGUEO
   function login(){
     //var db = firebase.database().ref("Estado");
     var data = firebase.database().ref("Usuarios");
@@ -816,7 +842,8 @@ function Catalogo(){
     });  
 
   }
-
+//#####################################################################################################################################################################
+//-------------------------FUNCION AUXILIAR PARA GUARDAR COTIZACIONES
   function getname(nam,root){
       console.log("LOL");
     var db = firebase.database().ref(root);
@@ -834,6 +861,8 @@ function Catalogo(){
         }
     });  
   }
+  //#####################################################################################################################################################################
+  //------------------------------FUNCION PARA GUARDAR EL PDF DE COTIZACIONES
   function genPdf(div){
     
     /*var pd = new jsPDF();
@@ -864,7 +893,8 @@ function Catalogo(){
     });
   
 }
-
+//#####################################################################################################################################################################
+//----------------------------------FUNCION PARA GUARDAR PDF EN LAS DEMAS TABLAS
 function genPdf2All(div,f){
     var x = document.getElementById(div);
     x.style="width:fit-content;background-color: #202940;";
