@@ -14,6 +14,9 @@
   <!-- Material Kit CSS -->
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+  <script src="js/jquery-1.7.1.min.js"></script>
+  <script src="js/jspdf.min.js"></script>
+  <script src="js/html2canvas.js"></script>
   <script src="js/acciones.js"></script>
   <script type="text/javascript">
      SESSION();
@@ -173,7 +176,7 @@
                           <thead class="">
                             <tr class="">
                               <th colspan="5" class="text-center"> Datos del Cliente</th>
-                              <th colspan="1" class="text-center">Acciones</th>
+                              <th class="no" colspan="1" class="text-center">Acciones</th>
                             </tr>
                             <tr>
                               <th>Nombre</th>
@@ -181,16 +184,19 @@
                               <th>Telefono</th>
                               <th>DUI</th>
                               <th>Nit</th>           
-                              <th></th>
+                              <th class="no" ></th>
                             </tr>
                           </thead>
                           <tbody id="tablac">
                             <script type="text/javascript">
+                              
                               mostrar("Clientes","tablac",["Nombre","Direccion","Telefono","Dui","Nit"]);
+                            
                             </script>
                           </tbody>
                         </table>
                       </div>
+                     
                       <!-- /.panel-body -->
                     </div>
                   </div>
@@ -232,7 +238,7 @@
                             <div class="formButtons">
                               <center>
                                 <input class="btn btn-primary" type="submit" name="btnAdd" id="btnAddc" value="Agregar Cliente"></input>
-                                <button class="btn btn-danger" type="button" name="btnPDF"> Generar PDF</button>
+                                <button class="btn btn-danger" onclick="javascript:genPdf2All('clientes','Clientes');" type="button" name="btnPDF"> Generar PDF</button>
                               </center>
                             </div>
                           </form>
