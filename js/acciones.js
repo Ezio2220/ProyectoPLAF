@@ -682,21 +682,21 @@ function Catalogo(){
 //#####################################################################################################################################################################
 //--------------------------------FUNCION QUE CONTROLA LAS SESIONES Y LIMITACIONES DE USUARIO ESTANDAR
   function SESSION(type=0){
-    //var db = firebase.database().ref("Estado");
+    var db = firebase.database().ref("Estado");
         var db = firebase.database().ref("Usuarios");
         var act = localStorage.getItem("Actual");
         console.log(act);
     db.once("value", function(snap) {
         var aux = snap.val();
-         //console.log(aux["Actual"]);
+         console.log(aux["Actual"]);
          if(aux[act].Estado == 0){
             window.location="index.html";
          }else if(aux[act].Tipo== "limitado" && type !=0){
             window.location="Principal.html";
          }
-     /*   if(aux["Actual"]==0){
+       if(aux["Actual"]==0){
             window.location="index.html";
-        }*/
+        }
     });
   }
 //#####################################################################################################################################################################
@@ -794,12 +794,16 @@ function Catalogo(){
   }
   //#####################################################################################################################################################################
   //-------------------------------------------------CERRAR SESION
-  function close(){
+  /*function lol(x=0){
+    alert("algo");
+  }*/
+  function cerrar(){
+      alert("cerrndo");
       console.log("cerrar sesion");
       var act = localStorage.getItem("Actual");
       var db = firebase.database().ref("Usuarios").child(act);
       db.child("Estado").set(0);
-      firebase.database().ref("Estado");
+      db = firebase.database().ref("Estado");
       db.child("Actual").set(0);
       db.child("user").set("0");
       alert("Cerrando sesion..");
