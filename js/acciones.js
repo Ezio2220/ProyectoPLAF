@@ -826,8 +826,8 @@ function Catalogo(){
                     this.Actual = name;
                     localStorage.setItem("Actual",name);
                     localStorage.setItem("Type",aux[documento].Tipo);
-                    //db.child("Actual").set(1);
-                    //db.child("user").set(name);
+                    db.child("Actual").set(1);
+                    db.child("user").set(name);
                     window.location="Principal.html";
                 }else{
                     
