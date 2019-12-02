@@ -799,9 +799,9 @@ function Catalogo(){
       var act = localStorage.getItem("Actual");
       var db = firebase.database().ref("Usuarios").child(act);
       db.child("Estado").set(0);
-      /*firebase.database().ref("Estado");
+      firebase.database().ref("Estado");
       db.child("Actual").set(0);
-      db.child("user").set("0");*/
+      db.child("user").set("0");
       alert("Cerrando sesion..");
       window.location="index.html";
   }
