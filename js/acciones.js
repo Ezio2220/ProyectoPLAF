@@ -89,16 +89,18 @@ var Actual;
                         for(var documento2 in aux2){
                             console.log("1");
                             if(documento2 == nomax){
-                                alert("ESE USUARIO YA EXISTE!");
+                                md.showNotification('top','center',2,'<h3>ESE USUARIO YA EXISTE!</h3>',10);
+                               // alert("ESE USUARIO YA EXISTE!");
                                 j= false;
-                                location.reload(true);
+                                setTimeout(function(){location.reload(true)},1500);
+                                
                             }
                         }
                         if(j){
                             console.log("2");
                         add.set(obj);
                         dot.child(nomax).set(objax);
-                        (sel==0) ? (alert("GUARDADO!"),location.reload(true)) : (alert("Actualizado"),location.reload(true)) ;
+                        (sel==0) ? ( md.showNotification('top','center',3,'<h3>GUARDADO!</h3>',10) /*alert("GUARDADO!")*/, setTimeout(function(){location.reload(true)},1500))  : ( /*alert("Actualizado")*/md.showNotification('top','center',1,'<h3>Actualizado</h3>',10),setTimeout(function(){location.reload(true)},1500)) ;
                         }
                         
                     });
@@ -106,7 +108,7 @@ var Actual;
             
         }else{
             add.set(obj);
-            (sel==0) ? (alert("GUARDADO!"),location.reload(true)) : (alert("Actualizado"),location.reload(true)) ;
+            (sel==0) ? (md.showNotification('top','center',3,'<h3>GUARDADO!</h3>',10) /*alert("GUARDADO!")*/,setTimeout(function(){location.reload(true)},1500)) : (/*alert("Actualizado")*/md.showNotification('top','center',1,'<h3>Actualizado</h3>',10),setTimeout(function(){location.reload(true)},1500)) ;
         }
         
     });       
@@ -123,8 +125,9 @@ var Actual;
             var aux = snap.val();
             for(var documento in aux){
                 if(documento == norep){
-                    alert("ESE USUARIO YA EXISTE!");
-                    location.reload(true);
+                   md.showNotification('top','center',2,'<h3>ESE USUARIO YA EXISTE!</h3>',10)
+                    //alert("ESE USUARIO YA EXISTE!");
+                    setTimeout(function(){location.reload(true)},1500);
                 }
             }
             if(sel==0){
@@ -155,7 +158,7 @@ var Actual;
                 }
                 
             }
-            (sel==0) ? (alert("GUARDADO!"),location.reload(true)) : (alert("Actualizado"),location.reload(true)) ;
+            (sel==0) ? (/*alert("GUARDADO!")*/md.showNotification('top','center',3,'<h3>GUARDADO!</h3>',10),setTimeout(function(){location.reload(true)},1500)) : (/*alert("Actualizado")*/md.showNotification('top','center',1,'<h3>Actualizado</h3>',10),setTimeout(function(){location.reload(true)},1500)) ;
         });       
        
     }
@@ -177,8 +180,9 @@ var Actual;
             var dot = firebase.database().ref("Usuarios");
             dot.child(item2).remove();
             data.child(item).remove();
-            alert("borrado");
-            location.reload(true);
+            //alert("borrado");
+            md.showNotification('top','center',2,'<h3>Borrado</h3>',10);
+            setTimeout(function(){location.reload(true)},1500);
         });
 
      }else if(root=="Usuarios"){
@@ -193,22 +197,25 @@ var Actual;
                             
                             dot.child(doc).remove();
                             data.child(item).remove();
-                            alert("borrado");
-                            location.reload(true);
+                            //alert("borrado");
+                            md.showNotification('top','center',2,'<h3>Borrado</h3>',10);
+                            setTimeout(function(){location.reload(true)},1500);
                         }
                     }
                 });
 
             }else{
                 data.child(item).remove();
-                alert("borrado");
-                location.reload(true);
+                //alert("borrado");
+                md.showNotification('top','center',2,'<h3>Borrado</h3>',10);
+                setTimeout(function(){location.reload(true)},1500);
             }
         });
      }else{
         data.child(item).remove();
-        alert("borrado");
-        location.reload(true);
+        //alert("borrado");
+        md.showNotification('top','center',2,'<h3>Borrado</h3>',10);
+        setTimeout(function(){location.reload(true)},1500);
      }
       
     }
@@ -233,8 +240,9 @@ function edt(root,titulo,loc,sel=0,title=[0,0]){
     var add;
     add = data.child(sel);
     add.set(obj);
-       alert("Actualizado");
-    location.reload(true);
+       //alert("Actualizado");
+       md.showNotification('top','center',1,'<h3>Actualizado</h3>',10);
+    setTimeout(function(){location.reload(true)},1500);
     //window.location=loc+".html";
   }
 //#####################################################################################################################################################################
@@ -364,7 +372,7 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
                     
                     x+="<td>"+xy[i]+"</td>"
                     console.log(xy[i]);
-                    arx.push(xy[i].replace(" ", "&nbsp;"));
+                    arx.push(xy[i].replace(/ /g, "&nbsp;"));
                     
                 });
                 x+="<td class='no' >";
@@ -372,6 +380,9 @@ function editar(root,id,n1=[0,0],n2=[0,0]){
                     if(comp=="admin"){
                         x+="<button onclick="+"borrar('"+root+"','delete"+i+"');"+" id='delete"+i+"' value='"+documento+"' class='btn btn-danger' type='button' name='add'><i class='material-icons'>delete</i> </button> ";
                     }
+                    console.log(arx);
+                    console.log(JSON.stringify(arx));
+                   // alert(JSON.stringify(arx));
                 x+="<button onclick="+"editar('"+root+"','edit"+i+"',["+n+"],"+JSON.stringify(arx)+");"+" id='edit"+i+"' value='"+documento+"' class='btn btn-info' type='button' name='add'><i class='material-icons'>create</i> </button>"+
                     "</td> </tr>";
                 var acum = x.substring(0,x.length-5);
@@ -472,7 +483,8 @@ function cotizar(v,c,f,p,t){
         var add
         add = data.child(id);
         add.set(obj);
-        alert("cotizacion guardada!");
+        //alert("cotizacion guardada!");
+        md.showNotification('top','center',3,'<h3>cotizacion guardada!</h3>',10);
     });
     //console.log(obj);
     //console.log(fecha);
@@ -547,7 +559,8 @@ function traspaso(n1,n2){
         });
     }
     if(n1==0 && n2==0){
-        alert("debe seleccionar almenos 1 servicio y/o Producto");
+       // alert("debe seleccionar almenos 1 servicio y/o Producto");
+       md.showNotification('top','center',4,'<h3>debe seleccionar almenos 1 servicio y/o Producto</h3>',10);
         window.location="Catalogo.html";
     }
     
@@ -754,7 +767,8 @@ function Catalogo(){
   //----------------------------ACTUALIZAR TABLA AL BUSCAR EN COTIZACIONES
   function addcot(idc=0){
     if(idc==0){
-        alert("debe seleccionar un producto/servicio");
+        //alert("debe seleccionar un producto/servicio");
+        md.showNotification('top','center',4,'<h3>debe seleccionar un producto/servicio</h3>',10);
     }else{
     var idn = document.getElementById(idc).value;
     var n = idn.substring(0,1);
@@ -787,7 +801,7 @@ function Catalogo(){
         localStorage.setItem("ser",JSON.stringify(servicio));
         console.log("SERVICIO");
     }
-    location.reload(true);
+    setTimeout(function(){location.reload(true)},1500);
     }
     
 
@@ -798,16 +812,21 @@ function Catalogo(){
     alert("algo");
   }*/
   function cerrar(){
-      alert("cerrndo");
+     // alert("cerrndo");
       console.log("cerrar sesion");
       var act = localStorage.getItem("Actual");
       var db = firebase.database().ref("Usuarios").child(act);
       db.child("Estado").set(0);
       db = firebase.database().ref("Estado");
       db.child("Actual").set(0);
-      db.child("user").set("0");
-      alert("Cerrando sesion..");
-      window.location="index.html";
+      db.child("user").set("0");                                            
+      //alert("Cerrando sesion..");
+      
+     // window.location.setTimeout(window.location="index.html",1500);
+     
+     md.showNotification('top','center',4,'<h1>Cerrando sesion..</h1>',10);
+     setTimeout(function(){window.location="index.html"},1000);
+     
   }
 //#####################################################################################################################################################################
 //----------------------------------------------LOGUEO
@@ -825,22 +844,26 @@ function Catalogo(){
             if(documento == name){
                 bandera=false;
                 if(pass == aux[documento].contraseña){
-                    alert("Correcto");
+                   // alert("Correcto");
+                   md.showNotification('top','center',3,'<h1>CORRECTO!</h1>',10);
                     data.child(name).child("Estado").set(1);
                     this.Actual = name;
                     localStorage.setItem("Actual",name);
                     localStorage.setItem("Type",aux[documento].Tipo);
                     db.child("Actual").set(1);
                     db.child("user").set(name);
-                    window.location="Principal.html";
+                    setTimeout(function(){window.location="Principal.html"},1500);
+                    
                 }else{
                     
-                    alert("usuario y/o contraseña Incorrectos");
+                    //alert("usuario y/o contraseña Incorrectos");
+                    md.showNotification('top','center',2,'<h1>usuario y/o contraseña Incorrectos</h1>',10);
                 }
             }
        }
        if(bandera){
-           alert("usuario y/o contraseña Incorrectos");
+           //alert("usuario y/o contraseña Incorrectos");
+           md.showNotification('top','center',2,'<h1>usuario y/o contraseña Incorrectos</h1>',10);
        }
        
     });  

@@ -273,18 +273,22 @@ md = {
     }
   },
 
-  showNotification: function(from, align) {
+  showNotification: function(from, align,cl=0,msj="Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer.",tmp=3000) {
     type = ['', 'info', 'danger', 'success', 'warning', 'primary'];
-
-    color = Math.floor((Math.random() * 5) + 1);
-
+    if(cl==0){
+      color = Math.floor((Math.random() * 5) + 1);
+    }else{
+      color = cl;
+    }
+    
+// "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
     $.notify({
       icon: "add_alert",
-      message: "Welcome to <b>Material Dashboard</b> - a beautiful freebie for every web developer."
+      message:  msj 
 
     }, {
       type: type[color],
-      timer: 3000,
+      timer: tmp,
       placement: {
         from: from,
         align: align

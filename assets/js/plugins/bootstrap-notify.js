@@ -198,7 +198,7 @@
           self.reposition(posX);
         },
         close: function() {
-          self.cerrar();
+          self.close();
         }
       };
 
@@ -315,7 +315,7 @@
       var self = this;
 
       this.$ele.find('[data-notify="dismiss"]').on('click', function() {
-        self.cerrar();
+        self.close();
       });
 
       this.$ele.mouseover(function() {
@@ -336,7 +336,7 @@
           }
           if (delay <= -(self.settings.timer)) {
             clearInterval(timer);
-            self.cerrar();
+            self.close();
           }
         }, self.settings.timer);
       }
